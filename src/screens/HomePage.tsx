@@ -17,18 +17,18 @@ const HomePage = () => {
     {
       name: "Wedding",
       href: "/wedding",
-      image: "/assets/wedding",
+      image: "/assets/wedding.jpg",
     },
     {
       name: "Portraits",
       href: "/portraits",
       image:
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-03-13%20at%2023.29.38.png-qJNs4msHza6r54Jv5vU3M0Dqe8sUBN.jpeg",
+        "/assets/portrait.jpg",
     },
     {
       name: "Engagement",
       href: "/engagement",
-      image: "/placeholder.svg?height=800&width=1920",
+      image: "/assets/engagement.jpg",
     },
   ];
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -140,8 +140,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      <section className="relative h-[800px] w-full overflow-hidden">
-        {/* Background Images */}
+      <section className="relative h-[700px] w-full overflow-hidden">
         {categories.map((category) => (
           <div
             key={category.name}
