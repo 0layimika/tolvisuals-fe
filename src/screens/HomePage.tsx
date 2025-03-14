@@ -22,8 +22,7 @@ const HomePage = () => {
     {
       name: "Portraits",
       href: "/portraits",
-      image:
-        "/assets/portrait.jpg",
+      image: "/assets/portrait.jpg",
     },
     {
       name: "Engagement",
@@ -133,7 +132,7 @@ const HomePage = () => {
 
           <Link
             href="/portfolio"
-            className="font-serif text-center text-2xl font-light tracking-wide hover:text-gray-600"
+            className="font-serif mb-6 text-center text-2xl font-light tracking-wide hover:text-gray-600"
           >
             See My Work
           </Link>
@@ -159,11 +158,10 @@ const HomePage = () => {
           </div>
         ))}
 
-        {/* Navigation */}
-        <div className="absolute inset-0 flex items-center justify-between px-16">
+        <div className="absolute max-w-5xl mx-auto inset-0 flex items-center justify-between px-16">
           <Link
             href="/wedding"
-            className="group flex items-center space-x-2 text-white transition-opacity hover:opacity-80"
+            className="group flex flex-col gap-5 items-center space-x-2 text-white transition-opacity hover:opacity-80"
             onMouseEnter={() => setActiveCategory("Wedding")}
           >
             <span className="font-serif text-3xl font-light tracking-wide">
@@ -179,10 +177,12 @@ const HomePage = () => {
 
           <Link
             href="/portraits"
-            className="font-serif text-3xl font-light tracking-wide text-white transition-opacity hover:opacity-80"
+            className="font-serif items-center flex gap-5 flex-col text-3xl font-light tracking-wide text-white transition-opacity"
             onMouseEnter={() => setActiveCategory("Portraits")}
           >
-            Portraits
+            <span className="font-serif text-3xl font-light tracking-wide">
+              Portraits
+            </span>
             <Image
               src="/assets/arrowRight.svg"
               alt="next"
@@ -193,7 +193,7 @@ const HomePage = () => {
 
           <Link
             href="/engagement"
-            className="group flex items-center space-x-2 text-white transition-opacity hover:opacity-80"
+            className="group  flex flex-col gap-5 items-center space-x-2 text-white transition-opacity hover:opacity-80"
             onMouseEnter={() => setActiveCategory("Engagement")}
           >
             <span className="font-serif text-3xl font-light tracking-wide">
@@ -208,6 +208,9 @@ const HomePage = () => {
           </Link>
         </div>
       </section>
+      <div className="flex justify-center my-24 mb-44 items-center">
+        <Link href="/portfolio" className="bg-[#bbac95] font-serif text-white py-2.5 px-7 ">See More Galleries</Link>
+      </div>
     </div>
   );
 };

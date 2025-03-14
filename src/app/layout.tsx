@@ -12,9 +12,8 @@ const geistSans = Geist({
 
 const playfairDisplay = Playfair_Display({
   variable: "--font-playfair-display",
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext", "cyrillic", "vietnamese"],
 });
-
 
 export const metadata: Metadata = {
   title: "Create Next App",

@@ -8,7 +8,7 @@ export default function InstagramSection() {
   return (
     <section
       onClick={() => window.open(instagramUrl, "_blank", "noopener,noreferrer")}
-      className="w-full opacity-0  transition-opacity duration-300 hover:opacity-100 cursor-pointer bg-[#807c7c] py-24 flex items-center justify-center relative"
+      className="w-full my-12 opacity-0  transition-opacity duration-300 hover:opacity-100 cursor-pointer bg-[#807c7c] py-24 flex items-center justify-center relative"
     >
       <div className="absolute inset-0"></div>
 
