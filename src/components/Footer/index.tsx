@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
+import Container from "../Container";
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -21,7 +22,7 @@ export default function Footer() {
 
   return (
     <footer className="w-full bg-white py-12">
-      <div className="mx-auto max-w-7xl px-8">
+      <Container className="mx-auto max-w-7xl px-8">
         <div className="border-t border-gray-200"></div>
 
         <div className="flex items-start justify-between py-12">
@@ -108,7 +109,7 @@ export default function Footer() {
             <span className="text-xs font-light text-gray-800">P</span>
           </div>
         </div> */}
-      </div>
+      </Container>
     </footer>
   );
 }

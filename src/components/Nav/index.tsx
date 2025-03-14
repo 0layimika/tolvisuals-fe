@@ -12,7 +12,7 @@ const Nav = () => {
   ];
 
   return (
-    <nav className="absolute text-white top-0 max-w-7xl mx-auto left-0 right-0 z-10 flex items-center justify-center px- py-6">
+    <nav className="absolute font-serif text-white top-0 max-w-5xl mx-auto left-0 right-0 z-10 flex items-center justify-center px- py-6">
       <div className="flex w-full  items-center justify-center gap-x-16">
         <div className="flex items-center gap-x-16">
           {navLinks.slice(0, 3).map((navItem) => (

@@ -209,7 +209,12 @@ const HomePage = () => {
         </div>
       </section>
       <div className="flex justify-center my-24 mb-44 items-center">
-        <Link href="/portfolio" className="bg-[#bbac95] font-serif text-white py-2.5 px-7 ">See More Galleries</Link>
+        <Link
+          href="/portfolio"
+          className="bg-[#bbac95] hover:bg-[#807c7c] transition-colors duration-300 ease-in-out font-serif text-white py-2.5 px-7 "
+        >
+          See More Galleries
+        </Link>
       </div>
     </div>
   );
