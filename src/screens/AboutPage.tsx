@@ -105,7 +105,7 @@ const AboutPage = () => {
                       key={index}
                       className="font-serif text-2xl font-light leading-normal text-gray-800"
                     >
-                      "{paragraph}"
+                      &apos;{paragraph}&apos;
                     </p>
                   ))}
                   <p className="text-sm font-light tracking-wide text-gray-600">
