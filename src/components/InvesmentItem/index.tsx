@@ -20,7 +20,7 @@ const InvestmentItem = ({
     <div className="">
       <div
         className={`grid  gap-16 md:grid-cols-2 md:gap-24 ${
-          left ? "md:grid-flow-dense text-right " : "text-left"
+          left ? " lg:text-right " : "lg:text-left"
         }`}
       >
         <div
@@ -40,14 +40,14 @@ const InvestmentItem = ({
         <div
           className={`flex flex-col justify-center ${left ? "md:order-1" : ""}`}
         >
-          <div className={`mb-24 `}>
+          <div className={`lg:mb-24 `}>
             <h3 className="mb-6 font-serif text-3xl tracking-widest text-gray-900">
               {title}
             </h3>
             {description.map((text, _idx) => (
               <p
                 key={_idx}
-                className="mb-4 font-light text-xl leading-relaxed text-gray-600"
+                className="mb-4 font-light md:text-sm lg:text-xl text-xl leading-relaxed text-gray-600"
               >
                 {text}
               </p>

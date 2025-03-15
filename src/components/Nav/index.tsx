@@ -69,34 +69,40 @@ const Nav = () => {
           className="flex flex-col z-50 gap-[4px] w-[18px] lg:hidden cursor-pointer"
           onClick={() => setMobileNavOpen(!mobileNavOpen)}
         >
+          {/* Top Bar */}
           <motion.div
-            animate={
-              mobileNavOpen
-                ? { rotateZ: 45, y: 6, backgroundColor: "#000" }
-                : { backgroundColor: "#fff" }
-            }
+            animate={mobileNavOpen ? { rotateZ: 45, y: 6 } : {}}
+            style={{
+              backgroundColor:
+                mobileNavOpen || pathname === "/clients" ? "#000" : "#fff",
+            }}
             className="w-full h-[1.5px] transition-all duration-300"
           ></motion.div>
+
+          {/* Middle Bar */}
           <motion.div
             animate={
               mobileNavOpen
                 ? { opacity: 0 }
                 : { opacity: 1, transition: { delay: 0.3 } }
             }
+            style={{
+              backgroundColor: pathname === "/clients" ? "#000" : "#fff",
+            }}
             className="w-full h-[1.5px] transition-all duration-300"
-            style={{ backgroundColor: mobileNavOpen ? "#000" : "#fff" }}
           ></motion.div>
+
+          {/* Bottom Bar */}
           <motion.div
-            animate={
-              mobileNavOpen
-                ? { rotateZ: -45, y: -4, backgroundColor: "#000" }
-                : { backgroundColor: "#fff" }
-            }
+            animate={mobileNavOpen ? { rotateZ: -45, y: -4 } : {}}
+            style={{
+              backgroundColor:
+                mobileNavOpen || pathname === "/clients" ? "#000" : "#fff",
+            }}
             className="w-full h-[1.5px] transition-all duration-300"
           ></motion.div>
         </motion.div>
 
-        {/* Mobile Navigation Menu */}
         {hasMounted && (
           <motion.div
             animate={{ height: mobileNavOpen ? "calc(100%)" : 0 }}

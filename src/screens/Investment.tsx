@@ -97,7 +97,7 @@ const InvesmentPage = () => {
             <div className="h-px w-full  bg-gray-200" />
           </div>
 
-          <div className="grid gap-x-24 px-10 gap-y-16 md:grid-cols-2">
+          <div className="grid gap-x-24 lg:px-10 gap-y-16 md:grid-cols-2">
             {faqs.map((faq, index) => (
               <div key={index} className="space-y-4">
                 <h3 className="font-serif text-2xl font-light leading-snug text-gray-900">

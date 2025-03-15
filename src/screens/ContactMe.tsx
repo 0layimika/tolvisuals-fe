@@ -72,7 +72,7 @@ export default function ContactForm() {
   return (
     <section className="mx-auto max-w-3xl px-4 py-24 pb-12">
       <div className="mb-16">
-        <h1 className="mb-6 font-serif text-4xl font-light tracking-wide text-gray-900 md:text-4xl">
+        <h1 className="mb-6 font-serif md:text-4xl text-2xl font-light tracking-wide text-gray-900 ">
           Let&apos;s Start Your Journey
         </h1>
         <p className="mb-8 font-light leading-relaxed text-gray-600">
@@ -88,7 +88,7 @@ export default function ContactForm() {
       </div>
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <form onSubmit={form.handleSubmit(onSubmit)} className=" space-y-8">
           <FormField
             control={form.control}
             name="name"
@@ -171,7 +171,7 @@ export default function ContactForm() {
             name="sessionType"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-xs mb-2 tracking-widest">
+                <FormLabel className="text-xs mb-2 leading-relaxed tracking-widest">
                   WHAT TYPE OF SESSION ARE YOU LOOKING FOR? *
                 </FormLabel>
                 <FormControl>
@@ -266,7 +266,7 @@ export default function ContactForm() {
             name="communication"
             render={() => (
               <FormItem>
-                <FormLabel className="text-xs mb-2 tracking-widest">
+                <FormLabel className="text-xs mb-2 leading-relaxed tracking-widest">
                   WHAT IS YOUR PREFERRED MODE OF COMMUNICATION FOR OUR INQUIRY
                   RESPONSE? *
                 </FormLabel>

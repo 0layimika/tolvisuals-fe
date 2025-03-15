@@ -115,7 +115,7 @@ const ClientPage = () => {
 
   return (
     <div>
-      <Container className="py-24 mt-24">
+      <Container className="py-24 lg:mt-24   ">
         <div className="mb-20">
           <h2 className="mb-9 font-serif text-center text-4xl font-extralight tracking-wide text-gray-900 md:text-4xl">
             Client Area
@@ -128,7 +128,7 @@ const ClientPage = () => {
         </div>
 
         {/* Categories */}
-        <div className="mb-10 flex space-x-8">
+        <div className="mb-10 flex hide-scrollbar overflow-scroll md:justify-start space-x-8">
           {categories.map((category) => (
             <button
               key={category}

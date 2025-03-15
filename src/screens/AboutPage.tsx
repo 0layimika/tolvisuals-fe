@@ -49,7 +49,7 @@ const AboutPage = () => {
   };
   return (
     <div>
-      <section className="relative h-[66vh] w-full overflow-hidden">
+      <section className="relative lg:h-[66vh] h-[70vh] w-full overflow-hidden">
         {/* Background Image */}
         <Image
           src="/assets/me.jpg"
@@ -67,13 +67,13 @@ const AboutPage = () => {
           <h1 className="font-serif text-5xl font-light tracking-wide text-white md:text-6xl lg:text-7xl">
             About Me
           </h1>
-          <p className="mt-4 text-sm tracking-[0.2em] text-white/90">
+          <p className="mt-4 text-sm  text-center tracking-[0.2em] text-white/90">
             GET TO KNOW ME A LITTLE BETTER
           </p>
         </div>
       </section>
       <Container className="mx-auto px-4 py-24 pb-12">
-        <div className="grid items-center gap-16 md:grid-cols-2 md:gap-24">
+        <div className="grid items-center gap-16 lg:grid-cols-2 grid-cols-1 md:gap-24">
           {/* Image */}
           <div className="relative aspect-square w-full overflow-hidden">
             <Image
@@ -86,17 +86,20 @@ const AboutPage = () => {
           </div>
 
           <div className="text-left">
-            <h2 className="font-serif md:text-3xl text-xl font-light tracking-wide text-gray-900 ">
+            <h2 className="font-serif sm:text-3xl text-2xl font-light tracking-wide text-gray-900 ">
               Hi, I am Lorem Ipsum.
             </h2>
           </div>
         </div>
 
-        <div className="pt-24 ">
-          <div className="grid gap-12 md:grid-cols-2 md:gap-24">
-            <div className="flex flex-col">
-              <div className="flex-1">
-                <h2 className="mb-28 font-serif text-2xl font-light tracking-wide text-gray-900 md:text-3xl">
+        <div className="lg:pt-24 pt-32">
+          <h2 className="lg:mb-28 lg:hidden font-serif mb-8  font-light tracking-wide text-gray-900 text-3xl">
+            Testimonials
+          </h2>
+          <div className="grid gap-12 md:grid-cols-2 grid-cols-1 md:gap-24">
+            <div className="flex order-2 lg:order-1 flex-col">
+              <div className="flex-1 order-2 lg:order-1">
+                <h2 className="lg:mb-28 lg:block hidden mb-14 font-serif  font-light tracking-wide text-gray-900 text-3xl">
                   Testimonials
                 </h2>
                 <div className="space-y-8">
@@ -115,7 +118,7 @@ const AboutPage = () => {
               </div>
 
               {/* Navigation */}
-              <div className="py-3 flex flex-col  gap-2">
+              <div className="py-3 flex order-1 lg:order-2 lg:flex-col flex-row lg:gap-2 gap-5">
                 <button
                   onClick={prevSlide}
                   className="text-gray-800 cursor-pointer transition-colors hover:text-gray-600"
@@ -148,7 +151,7 @@ const AboutPage = () => {
             </div>
 
             {/* Image */}
-            <div className="relative aspect-[4/5] w-full overflow-hidden">
+            <div className="relative aspect-[4/5] order-1 lg:order-2 w-full overflow-hidden">
               <Image
                 src={testimonials[currentSlide].image || "/placeholder.svg"}
                 alt={`Testimonial by ${testimonials[currentSlide].author}`}
