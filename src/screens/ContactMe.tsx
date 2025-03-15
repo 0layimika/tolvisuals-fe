@@ -73,7 +73,7 @@ export default function ContactForm() {
     <section className="mx-auto max-w-3xl px-4 py-24 pb-12">
       <div className="mb-16">
         <h1 className="mb-6 font-serif text-4xl font-light tracking-wide text-gray-900 md:text-4xl">
-          Let's Start Your Journey
+          Let&apos;s Start Your Journey
         </h1>
         <p className="mb-8 font-light leading-relaxed text-gray-600">
           Are you looking to tell your unique love stories in the most beautiful
