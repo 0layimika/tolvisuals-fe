@@ -26,7 +26,7 @@ export default function Footer() {
         <div className="border-t border-gray-200"></div>
 
         <div className="flex items-start justify-between py-12">
-          <div className="grid grid-cols-2 gap-x-24 gap-y-8">
+          <div className="grid sm:grid-cols-2 grid-cols-1 gap-x-24 gap-y-8">
             <div className="space-y-8">
               {navLinks.slice(0, 3).map((navItem) => (
                 <Link
@@ -71,12 +71,12 @@ export default function Footer() {
         <div className="border-t border-gray-200"></div>
 
         {/* Copyright and social */}
-        <div className="flex items-center justify-between pt-12">
-          <p className="text-xs font-light text-gray-800">
+        <div className="flex sm:flex-row flex-col sm:items-center gap-5 justify-between md:pt-12 pt-8">
+          <p className="text-xs order-2 sm:order-1 font-light text-gray-800">
             All content Copyright © {new Date().getFullYear()} Ayo Ayo
           </p>
 
-          <div className="flex items-center space-x-6">
+          <div className="flex order-1 sm:order-2 items-center space-x-6">
             <Link
               href="https://www.instagram.com/tolvisuals/?igsh=ZjBoeHF3dzE4c3Fp"
               className="text-gray-800 hover:text-gray-600"

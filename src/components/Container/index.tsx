@@ -11,7 +11,7 @@ const Container = ({ children, className, id }: ContainerProps) => {
     <div
       id={id}
       className={
-        "max-w-7xl lg:px-6 md:px-10 px-5  mx-auto w-full  " + className
+        "max-w-7xl lg:px-6 md:px-10 px-3  mx-auto w-full  " + className
       }
     >
       {children}
