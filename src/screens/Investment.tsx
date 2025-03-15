@@ -67,7 +67,7 @@ const InvesmentPage = () => {
               "Sunt sed aliquid dignissimos repellat. Eveniet, vitae?",
             ]}
             footerText="CONTACT ME"
-            image="/assets/image4.jpg"
+            image="/assets/client1.jpg"
             title="PORTRAITS"
           />
           <InvestmentItem
@@ -75,7 +75,7 @@ const InvesmentPage = () => {
               "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt sed aliquid dignissimos repellat. Eveniet, vitae?",
             ]}
             footerText="GET IN TOUCH"
-            image="/assets/image6.jpg"
+            image="/assets/client4.jpg"
             title="ENGAGEMENTS"
             left={true}
           />
@@ -84,7 +84,7 @@ const InvesmentPage = () => {
               "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt sed aliquid dignissimos repellat. Eveniet, vitae?",
             ]}
             footerText="CONTACT ME"
-            image="/assets/image1.jpg"
+            image="/assets/image2.jpg"
             title="WEDDINGS"
           />
         </div>

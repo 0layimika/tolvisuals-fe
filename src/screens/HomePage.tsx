@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const HomePage = () => {
   const slides = [
-    { id: 1, image: "/assets/image1.jpg", number: "01" },
+    { id: 1, image: "/assets/client2.jpg", number: "01" },
     { id: 2, image: "/assets/image2.jpg", number: "02" },
     { id: 3, image: "/assets/image3.jpg", number: "03" },
     { id: 4, image: "/assets/image4.jpg", number: "04" },
