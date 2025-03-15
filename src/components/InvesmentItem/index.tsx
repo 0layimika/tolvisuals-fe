@@ -44,8 +44,11 @@ const InvestmentItem = ({
             <h3 className="mb-6 font-serif text-3xl tracking-widest text-gray-900">
               {title}
             </h3>
-            {description.map((text) => (
-              <p className="mb-4 font-light text-xl leading-relaxed text-gray-600">
+            {description.map((text, _idx) => (
+              <p
+                key={_idx}
+                className="mb-4 font-light text-xl leading-relaxed text-gray-600"
+              >
                 {text}
               </p>
             ))}
