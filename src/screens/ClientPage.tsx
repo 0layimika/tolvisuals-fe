@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Container from "@/components/Container";
 import Pagination from "@/components/Pagination";
+import ImageSlider from "@/components/ImageSlider";
 
 type Category =
   | "ALL"
@@ -11,7 +12,14 @@ type Category =
   | "WEDDINGS"
   | "CHILDREN AND FAMILY"
   | "PRODUCT AND LIFESTYLE";
+
 const ITEMS_PER_PAGE = 9;
+
+interface ImageItem {
+  image: string;
+  title: string;
+  category: Category;
+}
 
 const ClientPage = () => {
   const categories: Category[] = [
@@ -23,13 +31,12 @@ const ClientPage = () => {
     "WEDDINGS",
   ];
 
-  const galleryItems = [
+  const galleryItems: ImageItem[] = [
     {
       image: "/assets/client1.jpg",
       title: "FAVOUR & DARA",
       category: "ENGAGEMENT",
     },
-
     {
       image: "/assets/client2.jpg",
       title: "TEMI & DARE",
@@ -51,56 +58,6 @@ const ClientPage = () => {
       category: "WEDDINGS",
     },
     {
-      image: "/assets/client2.jpg",
-      title: "OBASAN & FAITH",
-      category: "ENGAGEMENT",
-    },
-    {
-      image: "/assets/client2.jpg",
-      title: "OBASAN & FAITH",
-      category: "ENGAGEMENT",
-    },
-    {
-      image: "/assets/client2.jpg",
-      title: "OBASAN & FAITH",
-      category: "ENGAGEMENT",
-    },
-    {
-      image: "/assets/client2.jpg",
-      title: "OBASAN & FAITH",
-      category: "ENGAGEMENT",
-    },
-    {
-      image: "/assets/client2.jpg",
-      title: "OBASAN & FAITH",
-      category: "ENGAGEMENT",
-    },
-    {
-      image: "/assets/client2.jpg",
-      title: "OBASAN & FAITH",
-      category: "ENGAGEMENT",
-    },
-    {
-      image: "/assets/client2.jpg",
-      title: "OBASAN & FAITH",
-      category: "ENGAGEMENT",
-    },
-    {
-      image: "/assets/client2.jpg",
-      title: "OBASAN & FAITH",
-      category: "ENGAGEMENT",
-    },
-    {
-      image: "/assets/client2.jpg",
-      title: "OBASAN & FAITH",
-      category: "ENGAGEMENT",
-    },
-    {
-      image: "/assets/client2.jpg",
-      title: "OBASAN & FAITH",
-      category: "ENGAGEMENT",
-    },
-    {
       image: "/assets/childrenandfamily.jpg",
       title: "WANG FAMILY",
       category: "CHILDREN AND FAMILY",
@@ -114,6 +71,9 @@ const ClientPage = () => {
 
   const [activeCategory, setActiveCategory] = useState<Category>("ALL");
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(
+    null
+  );
 
   const filteredItems = galleryItems.filter(
     (item) => activeCategory === "ALL" || item.category === activeCategory
@@ -133,24 +93,26 @@ const ClientPage = () => {
 
   return (
     <div>
-      <Container className="py-24 lg:mt-24   ">
-        <div className="mb-20">
-          <h2 className="mb-9 font-serif text-center text-4xl font-extralight tracking-wide text-gray-900 md:text-4xl">
+      <Container className="py-24 lg:mt-24">
+        {/* Header */}
+        <div className="mb-20 text-center">
+          <h2 className="mb-9 font-serif text-4xl font-extralight tracking-wide text-gray-900">
             Client Area
           </h2>
           <p className="mx-auto max-w-3xl font-light leading-relaxed text-gray-600">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
             nec felis libero. Ut blandit viverra urna quis scelerisque. Praesent
-            non venenatis ex. Morbi in pellentesque dui. Aliquam erat volutpat.
+            non venenatis ex.
           </p>
         </div>
 
-        <div className="mb-10 flex hide-scrollbar overflow-scroll md:justify-start space-x-8">
+        {/* Category Filters */}
+        <div className="mb-10 flex text-nowrap hide-scrollbar overflow-scroll md:justify-start space-x-8">
           {categories.map((category) => (
             <button
               key={category}
               onClick={() => handleCategoryChange(category)}
-              className={`border-b-2 font-serif  pb-1 text-sm tracking-[0.2em] transition-all hover:border-gray-900 ${
+              className={`border-b-2 font-serif pb-1 text-sm tracking-[0.2em] transition-all hover:border-gray-900 ${
                 activeCategory === category
                   ? "border-gray-900 transition-colors duration-300 ease-in-out border-b-2"
                   : "border-transparent"
@@ -161,11 +123,14 @@ const ClientPage = () => {
           ))}
         </div>
 
+        {/* Image Grid */}
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {currentItems.map((item, index) => (
+          {currentItems.map((item) => (
             <div
-              key={index}
-              className="group relative aspect-square w-full overflow-hidden"
+              key={item.title}
+              onClick={() => setSelectedImageIndex(filteredItems.indexOf(item))}
+              tabIndex={0} // Allows keyboard navigation
+              className="group relative aspect-square w-full overflow-hidden cursor-pointer"
             >
               <Image
                 src={item.image || "/placeholder.svg"}
@@ -174,13 +139,14 @@ const ClientPage = () => {
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-black/20 transition-opacity group-hover:opacity-0" />
-              <div className="absolute  inset-0 flex justify-center items-end p-8">
+              <div className="absolute inset-0 flex justify-center items-end p-8">
                 <h3 className="font-serif text-xl text-white">{item.title}</h3>
               </div>
             </div>
           ))}
         </div>
 
+        {/* Pagination */}
         {totalPages > 1 && (
           <div className="mt-16">
             <Pagination
@@ -191,6 +157,19 @@ const ClientPage = () => {
           </div>
         )}
       </Container>
+
+      {selectedImageIndex !== null && (
+        <ImageSlider
+          images={filteredItems.map((item) => ({
+            imageUrl: item.image,
+            user: item.title,
+          }))}
+          currentIndex={selectedImageIndex}
+          setCurrentIndex={(index) => setSelectedImageIndex(index)}
+          show
+          onClose={() => setSelectedImageIndex(null)}
+        />
+      )}
     </div>
   );
 };
