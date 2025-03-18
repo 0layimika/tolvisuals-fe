@@ -42,7 +42,7 @@ const Nav = () => {
               key={navItem.route}
               href={navItem.route}
               className={`text-sm font-light ${
-                darkPaths.includes(pathname)
+                darkPaths.includes(pathname) || pathname.startsWith("/clients")
                   ? "text-[#000] hover:text-[000]/80"
                   : "text-white hover:text-white/80"
               } `}
@@ -62,7 +62,7 @@ const Nav = () => {
               key={navItem.route}
               href={navItem.route}
               className={`text-sm font-light ${
-                darkPaths.includes(pathname)
+                darkPaths.includes(pathname) || pathname.startsWith("/clients")
                   ? "text-[#000] hover:text-[000]/80"
                   : "text-white hover:text-white/80"
               }`}

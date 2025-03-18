@@ -15,10 +15,11 @@ type Category =
 
 const ITEMS_PER_PAGE = 9;
 
-interface ImageItem {
+export interface ImageItem {
   image: string;
   title: string;
   category: Category;
+  id: number;
 }
 
 const ClientPage = () => {
@@ -36,36 +37,43 @@ const ClientPage = () => {
       image: "/assets/client1.jpg",
       title: "FAVOUR & DARA",
       category: "ENGAGEMENT",
+      id: 1,
     },
     {
       image: "/assets/client2.jpg",
       title: "TEMI & DARE",
       category: "PORTRAITS",
+      id: 2,
     },
     {
       image: "/assets/client3.jpg",
       title: "NNEKA & JORDAN",
       category: "WEDDINGS",
+      id: 3,
     },
     {
       image: "/assets/client4.jpg",
       title: "IBUKUN & DOLAPO",
       category: "ENGAGEMENT",
+      id: 4,
     },
     {
       image: "/assets/client5.jpg",
       title: "KENECHUKWU & OLOLADE",
       category: "WEDDINGS",
+      id: 5,
     },
     {
       image: "/assets/childrenandfamily.jpg",
       title: "WANG FAMILY",
       category: "CHILDREN AND FAMILY",
+      id: 6,
     },
     {
       image: "/assets/productandlifestyle.jpg",
       title: "APPLE",
       category: "PRODUCT AND LIFESTYLE",
+      id: 7,
     },
   ];
 
@@ -163,7 +171,9 @@ const ClientPage = () => {
           images={filteredItems.map((item) => ({
             imageUrl: item.image,
             user: item.title,
+            id: item.id,
           }))}
+          showDetails={true}
           currentIndex={selectedImageIndex}
           setCurrentIndex={(index) => setSelectedImageIndex(index)}
           show

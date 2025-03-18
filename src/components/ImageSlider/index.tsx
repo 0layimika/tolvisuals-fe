@@ -1,18 +1,20 @@
 "use client";
-
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 interface ImageData {
   imageUrl: string;
   user: string;
+  id: number;
 }
 
 interface ImageSliderProps {
   show: boolean;
   images: ImageData[];
   currentIndex: number;
+  showDetails: boolean
   onClose: () => void;
   setCurrentIndex: (index: number) => void;
 }
@@ -22,10 +24,12 @@ const ImageSlider: React.FC<ImageSliderProps> = ({
   images,
   currentIndex,
   onClose,
+  showDetails,
   setCurrentIndex,
 }) => {
   const [isAnimating, setIsAnimating] = useState(false);
   const [direction, setDirection] = useState<"next" | "prev">("next");
+  const router = useRouter();
 
   const next = useCallback(() => {
     if (currentIndex < images.length - 1 && !isAnimating) {
@@ -74,7 +78,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({
       <button
         onClick={prev}
         disabled={currentIndex === 0 || isAnimating}
-        className="bg-white cursor-pointer flex justify-center items-center absolute top-1/2 transform -translate-y-1/2 p-2 w-16 h-16 left-8 rounded-full shadow-md disabled:opacity-50"
+        className="bg-white disabled:cursor-not-allowed cursor-pointer flex justify-center items-center absolute top-1/2 transform -translate-y-1/2 p-2 w-16 h-16 left-8 rounded-full shadow-md disabled:opacity-50"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -91,7 +95,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({
         </svg>
       </button>
       <div
-        className="relative w-full max-w-lg bg-white rounded-xl shadow-lg overflow-hidden"
+        className="relative w-full max-w-lg bg-transparent rounded-xl shadow-lg overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="relative w-full md:h-[600px] h:[500px] flex items-center justify-center">
@@ -99,9 +103,9 @@ const ImageSlider: React.FC<ImageSliderProps> = ({
             <motion.div
               key={currentIndex}
               className={`absolute w-full h-full flex items-center justify-center`}
-                initial={{ opacity: 1, x: direction === "next" ? 50 : -50 }}
+              initial={{ opacity: 1, x: direction === "next" ? 50 : -50 }}
               animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: direction === "next" ? -50 : 50 }}
+              exit={{ opacity: 0, x: direction === "next" ? -50 : 50 }}
               transition={{ duration: 0.3 }}
             >
               <Image
@@ -113,20 +117,28 @@ const ImageSlider: React.FC<ImageSliderProps> = ({
               />
             </motion.div>
           </AnimatePresence>
-          <div className="absolute flex justify-center  gap-4 flex-col items-center inset-0 z-50">
-
-            <h2 className="text-white font-serif font-bold text-3xl text-wrap text-center">{images[currentIndex].user}</h2>
-            <button className="bg-white  hover:bg-black/70 hover:text-white/70 transition-colors duration-300 ease-in-out cursor-pointer py-2 px-4 font-serif font-light text-sm">View Gallery</button>
-
-
-          </div>
+          {showDetails ? (
+            <div className="absolute flex justify-center  gap-4 flex-col items-center inset-0 z-50">
+              <h2 className="text-white font-serif font-bold text-3xl text-wrap text-center">
+                {images[currentIndex].user}
+              </h2>
+              <button
+                onClick={() =>
+                  router.push(`${"/clients/" + images[currentIndex].id}`)
+                }
+                className="bg-white  hover:bg-black/70 hover:text-white/70 transition-colors duration-300 ease-in-out cursor-pointer py-2 px-4 font-serif font-light text-sm"
+              >
+                View Gallery
+              </button>
+            </div>
+          ) : null}
         </div>
       </div>
       <div className="absolute top-1/2 transform flex justify-center items-center -translate-y-1/2  px-4"></div>
       <button
         onClick={next}
         disabled={currentIndex === images.length - 1 || isAnimating}
-        className="bg-white cursor-pointer flex items-center justify-center absolute top-1/2 transform -translate-y-1/2 p-2 rounded-full w-16 h-16 right-8 shadow-md disabled:opacity-50"
+        className="bg-white cursor-pointer flex items-center justify-center absolute top-1/2 transform -translate-y-1/2 p-2 rounded-full w-16 h-16 right-8 shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
