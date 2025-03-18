@@ -48,6 +48,12 @@ const ClientPictures = () => {
       category: "PRODUCT AND LIFESTYLE",
       id: 7,
     },
+    {
+      image: "/assets/image5.jpg",
+      title: "SMOSH",
+      category: "ENGAGEMENT",
+      id: 8,
+    },
   ];
 
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(
@@ -58,7 +64,7 @@ const ClientPictures = () => {
       <h2 className="font-serif mb-10 lg:text-4xl font-light text-center md:text-3xl text-2xl">
         Client Name
       </h2>
-      <div className="grid gap-8 max-w-[1600px] px-7 mx-auto md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 max-w-[1600px] px-7 mx-auto md:grid-cols-2 lg:grid-cols-4">
         {galleryItems.map((item) => (
           <div
             key={item.title}
