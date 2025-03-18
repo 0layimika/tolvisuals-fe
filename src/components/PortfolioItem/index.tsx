@@ -1,5 +1,7 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface PortfolioItemProps {
   image: string;
@@ -14,8 +16,12 @@ export default function PortfolioItem({
   subtitle,
   href,
 }: PortfolioItemProps) {
+  const route = useRouter();
   return (
-    <div className="flex flex-col items-center">
+    <div
+      className="flex flex-col cursor-pointer  items-center"
+      onClick={() => route.push(href)}
+    >
       <div className="relative mb-8 aspect-[4/5] w-full overflow-hidden">
         <Image
           src={image || "/placeholder.svg"}

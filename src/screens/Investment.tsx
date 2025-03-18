@@ -87,6 +87,23 @@ const InvesmentPage = () => {
             image="/assets/image2.jpg"
             title="WEDDINGS"
           />
+          <InvestmentItem
+            description={[
+              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt sed aliquid dignissimos repellat. Eveniet, vitae?",
+            ]}
+            footerText="CONTACT ME"
+            image="/assets/childrenandfamily.jpg"
+            left={true}
+            title="CHILDREN AND FAMILY"
+          />
+          <InvestmentItem
+            description={[
+              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt sed aliquid dignissimos repellat. Eveniet, vitae?",
+            ]}
+            footerText="GET IN TOUCH"
+            image="/assets/productandlifestyle.jpg"
+            title="PRODUCTS AND LIFESTYLE"
+          />
         </div>
 
         <div className=" py-24">

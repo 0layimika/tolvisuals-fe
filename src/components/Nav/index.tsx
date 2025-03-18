@@ -17,7 +17,15 @@ const Nav = () => {
   ];
   const pathname = usePathname();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
-  const [hasMounted, setHasMounted] = useState(false); // Track if the component has mounted
+  const [hasMounted, setHasMounted] = useState(false);
+  const darkPaths = [
+    "/clients",
+    "/portfolio/wedding",
+    "/portfolio/engagement",
+    "/portfolio/children-and-family",
+    "/portfolio/products-and-lifestyle",
+    "/portfolio/portraits",
+  ];
 
   useEffect(() => {
     setHasMounted(true);
@@ -34,7 +42,7 @@ const Nav = () => {
               key={navItem.route}
               href={navItem.route}
               className={`text-sm font-light ${
-                pathname === "/clients"
+                darkPaths.includes(pathname)
                   ? "text-[#000] hover:text-[000]/80"
                   : "text-white hover:text-white/80"
               } `}
@@ -54,7 +62,7 @@ const Nav = () => {
               key={navItem.route}
               href={navItem.route}
               className={`text-sm font-light ${
-                pathname === "/clients"
+                darkPaths.includes(pathname)
                   ? "text-[#000] hover:text-[000]/80"
                   : "text-white hover:text-white/80"
               }`}
@@ -69,17 +77,15 @@ const Nav = () => {
           className="flex flex-col z-50 gap-[4px] w-[18px] lg:hidden cursor-pointer"
           onClick={() => setMobileNavOpen(!mobileNavOpen)}
         >
-          {/* Top Bar */}
           <motion.div
             animate={mobileNavOpen ? { rotateZ: 45, y: 6 } : {}}
             style={{
               backgroundColor:
-                mobileNavOpen || pathname === "/clients" ? "#000" : "#fff",
+                mobileNavOpen || darkPaths.includes(pathname) ? "#000" : "#fff",
             }}
             className="w-full h-[1.5px] transition-all duration-300"
           ></motion.div>
 
-          {/* Middle Bar */}
           <motion.div
             animate={
               mobileNavOpen
@@ -87,17 +93,16 @@ const Nav = () => {
                 : { opacity: 1, transition: { delay: 0.3 } }
             }
             style={{
-              backgroundColor: pathname === "/clients" ? "#000" : "#fff",
+              backgroundColor: darkPaths.includes(pathname) ? "#000" : "#fff",
             }}
             className="w-full h-[1.5px] transition-all duration-300"
           ></motion.div>
 
-          {/* Bottom Bar */}
           <motion.div
             animate={mobileNavOpen ? { rotateZ: -45, y: -4 } : {}}
             style={{
               backgroundColor:
-                mobileNavOpen || pathname === "/clients" ? "#000" : "#fff",
+                mobileNavOpen || darkPaths.includes(pathname) ? "#000" : "#fff",
             }}
             className="w-full h-[1.5px] transition-all duration-300"
           ></motion.div>

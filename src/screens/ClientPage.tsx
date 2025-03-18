@@ -4,11 +4,24 @@ import Image from "next/image";
 import Container from "@/components/Container";
 import Pagination from "@/components/Pagination";
 
-type Category = "ALL" | "ENGAGEMENT" | "PORTRAITS" | "WEDDINGS";
+type Category =
+  | "ALL"
+  | "ENGAGEMENT"
+  | "PORTRAITS"
+  | "WEDDINGS"
+  | "CHILDREN AND FAMILY"
+  | "PRODUCT AND LIFESTYLE";
 const ITEMS_PER_PAGE = 9;
 
 const ClientPage = () => {
-  const categories: Category[] = ["ALL", "ENGAGEMENT", "PORTRAITS", "WEDDINGS"];
+  const categories: Category[] = [
+    "ALL",
+    "CHILDREN AND FAMILY",
+    "ENGAGEMENT",
+    "PORTRAITS",
+    "PRODUCT AND LIFESTYLE",
+    "WEDDINGS",
+  ];
 
   const galleryItems = [
     {
@@ -88,9 +101,14 @@ const ClientPage = () => {
       category: "ENGAGEMENT",
     },
     {
-      image: "/assets/client2.jpg",
-      title: "OBASAN & FAITH",
-      category: "ENGAGEMENT",
+      image: "/assets/childrenandfamily.jpg",
+      title: "WANG FAMILY",
+      category: "CHILDREN AND FAMILY",
+    },
+    {
+      image: "/assets/productandlifestyle.jpg",
+      title: "APPLE",
+      category: "PRODUCT AND LIFESTYLE",
     },
   ];
 
@@ -127,14 +145,15 @@ const ClientPage = () => {
           </p>
         </div>
 
-        {/* Categories */}
         <div className="mb-10 flex hide-scrollbar overflow-scroll md:justify-start space-x-8">
           {categories.map((category) => (
             <button
               key={category}
               onClick={() => handleCategoryChange(category)}
-              className={`border-b-2 font-serif  border-transparent pb-1 text-sm tracking-[0.2em] transition-all hover:border-gray-900 ${
-                activeCategory === category ? "border-gray-900 border-b-2" : "border-transparent"
+              className={`border-b-2 font-serif  pb-1 text-sm tracking-[0.2em] transition-all hover:border-gray-900 ${
+                activeCategory === category
+                  ? "border-gray-900 transition-colors duration-300 ease-in-out border-b-2"
+                  : "border-transparent"
               }`}
             >
               {category}
@@ -142,7 +161,6 @@ const ClientPage = () => {
           ))}
         </div>
 
-        {/* Gallery Grid */}
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {currentItems.map((item, index) => (
             <div

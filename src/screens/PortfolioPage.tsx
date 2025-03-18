@@ -23,6 +23,18 @@ const PortfolioPage = () => {
       subtitle: "CAPTURING MOMENTS",
       href: "/portfolio/portraits",
     },
+    {
+      image: "/assets/childrenandfamily.jpg",
+      title: "Children and Family",
+      subtitle: "CHERISHED MOMENTS, LASTING MEMORIES",
+      href: "/portfolio/children-and-family",
+    },
+    {
+      image: "/assets/productandlifestyle.jpg",
+      title: "Product and Lifestyle",
+      subtitle: "SHOWCASING STYLE AND ELEGANCE",
+      href: "/portfolio/products-and-lifestyle",
+    },
   ];
   return (
     <div>
@@ -49,8 +61,8 @@ const PortfolioPage = () => {
           </p>
         </div>
       </section>
-      <Container className=" py-24">
-        <div className="grid gap-16 md:gap-y-8 md:grid-cols-2 md:gap-24">
+      <Container className="py-24">
+        <div className="grid gap-16 md:gap-y-12  md:grid-cols-2 md:gap-24">
           {portfolioItems.map((item, index) => (
             <PortfolioItem
               key={index}
