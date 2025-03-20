@@ -18,7 +18,7 @@ export default function VerticalImageList({
   }
 
   return (
-    <div className={cn("flex flex-col items-center gap-8 w-full", className)}>
+    <div className={cn("flex px-5 flex-col items-center gap-8 w-full", className)}>
       {images.map((image, index) => (
         <div key={index} className="w-full max-w-[800px] relative">
           <div className="relative w-full aspect-[3/4] md:aspect-[3/5]">
