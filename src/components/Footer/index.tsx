@@ -2,6 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import Container from "../Container";
+import TransitionLink from "../TransitionLink";
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -29,25 +30,25 @@ export default function Footer() {
           <div className="grid sm:grid-cols-2 grid-cols-1 gap-x-24 gap-y-8">
             <div className="space-y-8">
               {navLinks.slice(0, 3).map((navItem) => (
-                <Link
+                <TransitionLink
                   key={navItem.route}
                   href={navItem.route}
                   className="block text-sm font-light text-gray-800 hover:text-gray-600"
                 >
                   {navItem.name}
-                </Link>
+                </TransitionLink>
               ))}
             </div>
 
             <div className="space-y-8">
               {navLinks.slice(3, 6).map((navItem) => (
-                <Link
+                <TransitionLink
                   key={navItem.route}
                   href={navItem.route}
                   className="block text-sm font-light text-gray-800 hover:text-gray-600"
                 >
                   {navItem.name}
-                </Link>
+                </TransitionLink>
               ))}
             </div>
           </div>
@@ -77,7 +78,7 @@ export default function Footer() {
           </p>
 
           <div className="flex order-1 sm:order-2 items-center space-x-6">
-            <Link
+            <TransitionLink
               href="https://www.instagram.com/tolvisuals/?igsh=ZjBoeHF3dzE4c3Fp"
               className="text-gray-800 hover:text-gray-600"
               aria-label="Instagram"
@@ -88,8 +89,8 @@ export default function Footer() {
                 width={25}
                 height={25}
               />
-            </Link>
-            <Link
+            </TransitionLink>
+            <TransitionLink
               href="https://linkedin.com"
               className="text-gray-800 hover:text-gray-600"
               aria-label="LinkedIn"
@@ -100,7 +101,7 @@ export default function Footer() {
                 width={25}
                 height={25}
               />
-            </Link>
+            </TransitionLink>
           </div>
         </div>
 

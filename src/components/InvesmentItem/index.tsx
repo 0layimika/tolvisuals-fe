@@ -41,13 +41,13 @@ const InvestmentItem = ({
           className={`flex flex-col justify-center ${left ? "md:order-1" : ""}`}
         >
           <div className={`lg:mb-24 `}>
-            <h3 className="mb-6 font-serif text-3xl tracking-widest text-gray-900">
+            <h3 className="mb-6 font-serif lg:text-4xl text-2xl tracking-widest text-gray-900">
               {title}
             </h3>
             {description.map((text, _idx) => (
               <p
                 key={_idx}
-                className="mb-4 font-light md:text-sm lg:text-xl text-xl leading-relaxed text-gray-600"
+                className="mb-4 font-light md:text-sm lg:text-xl  leading-relaxed text-gray-600"
               >
                 {text}
               </p>

@@ -1,0 +1,11 @@
+import { APIClient } from "@/service/apiClient";
+import { useQuery } from "@tanstack/react-query";
+
+const apiClient = new APIClient<any>("/about");
+
+export const useGetAboutContent = () => {
+  return useQuery({
+    queryKey: ["aboutContent", apiClient.endpoint],
+    queryFn: () => apiClient.get(),
+  });
+};

@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import InvestmentItem from "@/components/InvesmentItem";
 import Container from "@/components/Container";
+import TransitionLink from "@/components/TransitionLink";
 
 const InvesmentPage = () => {
   const faqs = [
@@ -56,7 +57,7 @@ const InvesmentPage = () => {
         </div>
       </section>
       <Container className="py-24">
-        <h2 className="mb-16 text-center font-serif text-4xl font-light tracking-wide text-gray-900 md:text-5xl">
+        <h2 className="lg:mb-16 mb-10 lg:text-center  font-serif text-2xl lg:text-4xl font-light tracking-wide text-gray-900 md:text-5xl">
           Pricing & Packages
         </h2>
 
@@ -108,7 +109,7 @@ const InvesmentPage = () => {
 
         <div className=" py-24">
           <div className="mb-16">
-            <h2 className="mb-8 font-serif text-4xl font-light tracking-wide text-gray-900 md:text-4xl">
+            <h2 className="mb-8 font-serif lg:text-4xl text-3xl font-light tracking-wide text-gray-900 md:text-4xl">
               FAQ
             </h2>
             <div className="h-px w-full  bg-gray-200" />
@@ -133,12 +134,12 @@ const InvesmentPage = () => {
             <h3 className="mb-20 font-serif text-3xl font-light tracking-wide text-gray-900">
               Ready to Begin?
             </h3>
-            <Link
+            <TransitionLink
               href="/contact"
               className="inline-block font-serif bg-[#BEB3A7] px-8 py-3 text-sm font-light tracking-wide text-white transition-colors hover:bg-[#807c7c]"
             >
               Book a Session
-            </Link>
+            </TransitionLink>
           </div>
         </div>
       </Container>

@@ -4,6 +4,7 @@ import "./globals.css";
 import Footer from "@/components/Footer";
 import InstagramSection from "@/components/InstagramSection";
 import Nav from "@/components/Nav";
+import { ReactQueryClientProvider } from "@/components/ReactQueryClientProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,15 +27,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${playfairDisplay.variable} antialiased`}
-      >
-        <Nav />
-        {children}
-        <InstagramSection />
-        <Footer />
-      </body>
-    </html>
+    <ReactQueryClientProvider>
+      <html lang="en">
+        <body
+          className={`${geistSans.variable} ${playfairDisplay.variable} antialiased`}
+        >
+          <Nav />
+          {children}
+          <InstagramSection />
+          <Footer />
+        </body>
+      </html>
+    </ReactQueryClientProvider>
   );
 }

@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import TransitionLink from "../TransitionLink";
 
 interface PortfolioItemProps {
   image: string;
@@ -37,7 +38,7 @@ export default function PortfolioItem({
 
       <p className="mb-4 text-xs tracking-[0.2em] text-gray-600">{subtitle}</p>
 
-      <Link
+      <TransitionLink
         href={href}
         className="group flex items-center space-x-2 text-gray-900"
       >
@@ -47,7 +48,7 @@ export default function PortfolioItem({
           width={25}
           height={25}
         />
-      </Link>
+      </TransitionLink>
     </div>
   );
 }

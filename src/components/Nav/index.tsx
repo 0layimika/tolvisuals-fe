@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import Container from "../Container";
+import TransitionLink from "../TransitionLink";
 
 const Nav = () => {
   const navLinks = [
@@ -38,7 +39,7 @@ const Nav = () => {
       <div className="flex w-full items-center justify-between lg:justify-center gap-x-16">
         <div className="lg:flex hidden items-center gap-x-16">
           {navLinks.slice(0, 3).map((navItem) => (
-            <Link
+            <TransitionLink
               key={navItem.route}
               href={navItem.route}
               className={`text-sm font-light ${
@@ -48,17 +49,17 @@ const Nav = () => {
               } `}
             >
               {navItem.name}
-            </Link>
+            </TransitionLink>
           ))}
         </div>
 
-        <Link href="/" className="text-2xl italic font-light">
+        <TransitionLink href="/" className="text-2xl italic font-light">
           <Image src={"/assets/logoo.svg"} width={80} height={80} alt="logo" />
-        </Link>
+        </TransitionLink>
 
         <div className="lg:flex hidden items-center gap-x-16">
           {navLinks.slice(3, 6).map((navItem) => (
-            <Link
+            <TransitionLink
               key={navItem.route}
               href={navItem.route}
               className={`text-sm font-light ${
@@ -68,7 +69,7 @@ const Nav = () => {
               }`}
             >
               {navItem.name}
-            </Link>
+            </TransitionLink>
           ))}
         </div>
 
@@ -139,13 +140,13 @@ const Nav = () => {
                           }
                     }
                   >
-                    <Link
+                    <TransitionLink
                       href={navItem.route}
                       onClick={() => setMobileNavOpen(false)}
                       className="relative group text-2xl md:text-3xl"
                     >
                       {navItem.name}
-                    </Link>
+                    </TransitionLink>
                   </motion.div>
                 ))}
               </div>

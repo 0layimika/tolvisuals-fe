@@ -137,7 +137,19 @@
   transition: all 0.3s;
 }
 
-
 .hide-scrollbar::-webkit-scrollbar {
-    display: none;
+  display: none;
+}
+
+body {
+  transition-property: opacity, background, transform, filter;
+  transition-timing-function: ease-in-out;
+  transition-duration: 500ms;
+}
+
+.page-transition {
+  opacity: 0;
+  background: rgb(46, 46, 46);
+  transform: translateY(40px);
+  filter: blur(12px);
 }
