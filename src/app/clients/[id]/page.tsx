@@ -12,8 +12,10 @@ const SkeletonLoader = () => (
 const ClientPictures = () => {
   const pathname = usePathname();
   const clientId = parseInt(pathname.split("/").pop() || "0", 10);
-  const { data, isLoading, isFetching, refetch, isRefetching } =
-    useGetSingleClient({}, clientId);
+  const { data, isLoading, isFetching, refetch } = useGetSingleClient(
+    {},
+    clientId
+  );
 
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(
     null
