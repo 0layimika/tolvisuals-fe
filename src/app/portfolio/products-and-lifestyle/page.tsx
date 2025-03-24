@@ -1,33 +1,25 @@
-import VerticalImageList from '@/components/VerticalImageFormat';
-import React from 'react'
+"use client"
+import VerticalImageList from "@/components/VerticalImageFormat";
+import { usePortfolio } from "@/hooks/usePortfolio";
+import React from "react";
 
 const ProductLifeStyle = () => {
-    const images = [
-      {
-        src: "/assets/productandlifestyle.jpg",
-        alt: "Elegant couple in formal attire",
-      },
-      {
-        src: "/assets/image3.jpg",
-        alt: "Sample image 2",
-      },
-      {
-        src: "/assets/image4.jpg",
-        alt: "Sample image 3",
-      },
-      {
-        src: "/assets/image5.jpg",
-        alt: "Sample image 4",
-      },
-    ];
+  const { data: products } = usePortfolio({ category: "products" });
   return (
     <div className="py-24 lg:mt-12  ">
       <h2 className="font-serif mb-16 lg:text-4xl font-light text-center md:text-3xl text-2xl">
         Products and Lifestyle
       </h2>
-      <VerticalImageList images={images} />
+      <VerticalImageList
+        images={
+          products?.data.map((image) => ({
+            src: image.image_url,
+            alt: `${image.category} ${image.id}` || "A Wedding image",
+          })) || []
+        }
+      />
     </div>
   );
-}
+};
 
-export default ProductLifeStyle
+export default ProductLifeStyle;

@@ -11,8 +11,8 @@ export class APIClient<T> {
     this.endpoint = endpoint;
   }
 
-  async get(): Promise<T> {
-    const response = await axiosInstance.get<T>(this.endpoint);
+  async get(params?: Record<string, any>): Promise<T> {
+    const response = await axiosInstance.get<T>(this.endpoint, { params });
     return response.data;
   }
 }

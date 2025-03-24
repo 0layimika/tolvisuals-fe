@@ -46,7 +46,7 @@ const formSchema = z.object({
   otherCommunication: z.string().optional(),
   referralSource: z.string().min(1, "Please tell us how you heard about us"),
   additionalDetails: z.string().optional(),
-  recaptcha: z.string().min(1, "Please verify that you are not a robot"),
+  // recaptcha: z.string().min(1, "Please verify that you are not a robot"),
 });
 
 export default function ContactForm() {
@@ -60,12 +60,12 @@ export default function ContactForm() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    if (!recaptchaToken) {
-      form.setError("recaptcha", {
-        message: "Please complete the reCAPTCHA",
-      });
-      return;
-    }
+    // if (!recaptchaToken) {
+    //   form.setError("recaptcha", {
+    //     message: "Please complete the reCAPTCHA",
+    //   });
+    //   return;
+    // }
     console.log(values);
   }
 
@@ -88,7 +88,12 @@ export default function ContactForm() {
       </div>
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className=" space-y-8">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          action="https://formsubmit.co/olakay739@gmail.com"
+          method="POST"
+          className=" space-y-8"
+        >
           <FormField
             control={form.control}
             name="name"
@@ -373,7 +378,7 @@ export default function ContactForm() {
             )}
           />
 
-          <FormField
+          {/* <FormField
             control={form.control}
             name="recaptcha"
             render={() => (
@@ -388,7 +393,7 @@ export default function ContactForm() {
                 <FormMessage />
               </FormItem>
             )}
-          />
+          /> */}
 
           <Button
             type="submit"

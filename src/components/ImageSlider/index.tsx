@@ -31,7 +31,6 @@ const ImageSlider: React.FC<ImageSliderProps> = ({
   const [direction, setDirection] = useState<"next" | "prev">("next");
   const router = useRouter();
 
-
   const preloadImage = (index: number) => {
     const image = images[index];
     if (image) {
@@ -78,6 +77,8 @@ const ImageSlider: React.FC<ImageSliderProps> = ({
     document.addEventListener("keydown", handleKeydown);
     return () => document.removeEventListener("keydown", handleKeydown);
   }, [handleKeydown]);
+
+  console.log("Images array:", images);
 
   if (!show) return null;
 

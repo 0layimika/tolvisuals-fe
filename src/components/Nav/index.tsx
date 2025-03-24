@@ -21,8 +21,8 @@ const Nav = () => {
   const [hasMounted, setHasMounted] = useState(false);
   const darkPaths = [
     "/clients",
-    "/portfolio/wedding",
-    "/portfolio/engagement",
+    "/portfolio/weddings",
+    "/portfolio/engagements",
     "/portfolio/children-and-family",
     "/portfolio/products-and-lifestyle",
     "/portfolio/portraits",

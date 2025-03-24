@@ -1,42 +1,29 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import InvestmentItem from "@/components/InvesmentItem";
 import Container from "@/components/Container";
 import TransitionLink from "@/components/TransitionLink";
+import { useGetFaq } from "@/hooks/useGetFaqs";
+
+interface FAQResponse {
+  message: string;
+  data: FAQItem[];
+}
+
+interface FAQItem {
+  id: number;
+  question: string;
+  answer: string;
+}
 
 const InvesmentPage = () => {
-  const faqs = [
-    {
-      question: "How do I reserve you for my date or session time?",
-      answer:
-        "All session dates are reserved once we receive your signed contract and deposit.",
-    },
-    {
-      question: "What rights do I have to the digital prints?",
-      answer:
-        "You have the right to reprint images whenever you want. However, you may not sell your images for profit or publish your images without the written consent of Lorem Ipsum Photography.",
-    },
-    {
-      question:
-        "Do you provide the RAW files from my portrait session, engagement session and/or wedding day?",
-      answer:
-        "Each of our packages comes with a full resolution image download. However, we typically do not provide RAW (unprocessed) files from our shoots because we believe in delivering a finished product. In fact, we're often shooting with the end (post-produced) product in mind. However, on occasion, we may provide RAW images along with our post-produced JPG's for an additional fee and restrictions.",
-    },
-    {
-      question: "Do you shoot destination weddings?",
-      answer:
-        "While we are based in Lagos, Nigeria, we serve clients all around the world. Our destination wedding photography packages include the cost of travel and reasonable accommodations. Contact us via our inquiry form for more details",
-    },
-    {
-      question: "Do you provide framing services as well?",
-      answer:
-        "Yes, We do provide wall art and framing service. Inquire with your service consultant for more information!",
-    },
-  ];
+  const { data: faqs } = useGetFaq();
+
   return (
     <div>
-      <section className="relative h-[66vh] w-full overflow-hidden">
+      <section className="relative h-[100vh] w-full overflow-hidden">
         <Image
           src="/assets/image3.jpg"
           alt="Professional portrait"
@@ -47,7 +34,7 @@ const InvesmentPage = () => {
 
         <div className="absolute inset-0 bg-black/20" />
 
-        <div className="absolute font-serif inset-0 flex flex-col items-center justify-center pt-20">
+        <div className="absolute font-serif inset-0 flex flex-col items-center justify-center">
           <h1 className="font-serif text-3xl font-light tracking-wide text-white md:text-6xl lg:text-5xl">
             Investment
           </h1>
@@ -64,8 +51,7 @@ const InvesmentPage = () => {
         <div className="space-y-16">
           <InvestmentItem
             description={[
-              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt sed aliquid dignissimos repellat. Eveniet, vitae?",
-              "Sunt sed aliquid dignissimos repellat. Eveniet, vitae?",
+              "Timeless and elegant portraits that beautifully tell your story. We bring your ideas and dreams to life.",
             ]}
             footerText="CONTACT ME"
             image="/assets/client1.jpg"
@@ -73,7 +59,7 @@ const InvesmentPage = () => {
           />
           <InvestmentItem
             description={[
-              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt sed aliquid dignissimos repellat. Eveniet, vitae?",
+              "Excited to create images that beautifully capture the synergy between you and your loved one.",
             ]}
             footerText="GET IN TOUCH"
             image="/assets/client4.jpg"
@@ -82,7 +68,7 @@ const InvesmentPage = () => {
           />
           <InvestmentItem
             description={[
-              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt sed aliquid dignissimos repellat. Eveniet, vitae?",
+              "Capturing beautiful memories of your special day. Fill out our inquiry form to find the perfect package for your event.",
             ]}
             footerText="CONTACT ME"
             image="/assets/image2.jpg"
@@ -90,7 +76,7 @@ const InvesmentPage = () => {
           />
           <InvestmentItem
             description={[
-              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt sed aliquid dignissimos repellat. Eveniet, vitae?",
+              "Preserving precious moments with your children and family—genuine smiles, laughter, and love captured beautifully.",
             ]}
             footerText="CONTACT ME"
             image="/assets/childrenandfamily.jpg"
@@ -99,7 +85,7 @@ const InvesmentPage = () => {
           />
           <InvestmentItem
             description={[
-              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt sed aliquid dignissimos repellat. Eveniet, vitae?",
+              "Showcasing your products and lifestyle with stunning, high-quality visuals that tell a compelling story.",
             ]}
             footerText="GET IN TOUCH"
             image="/assets/productandlifestyle.jpg"
@@ -116,8 +102,8 @@ const InvesmentPage = () => {
           </div>
 
           <div className="grid gap-x-24 lg:px-10 gap-y-16 md:grid-cols-2">
-            {faqs.map((faq, index) => (
-              <div key={index} className="space-y-4">
+            {faqs?.data.map((faq) => (
+              <div key={faq.id} className="space-y-4">
                 <h3 className="font-serif text-2xl font-light leading-snug text-gray-900">
                   {faq.question}
                 </h3>

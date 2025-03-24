@@ -4,6 +4,7 @@ import Image from "next/image";
 import Container from "@/components/Container";
 import Pagination from "@/components/Pagination";
 import ImageSlider from "@/components/ImageSlider";
+import { useGetClients } from "@/hooks/useGetClients";
 
 type Category =
   | "ALL"
@@ -32,89 +33,51 @@ const ClientPage = () => {
     "WEDDINGS",
   ];
 
-  const galleryItems: ImageItem[] = [
-    {
-      image: "/assets/client1.jpg",
-      title: "FAVOUR & DARA",
-      category: "ENGAGEMENT",
-      id: 1,
-    },
-    {
-      image: "/assets/client2.jpg",
-      title: "TEMI & DARE",
-      category: "PORTRAITS",
-      id: 2,
-    },
-    {
-      image: "/assets/client3.jpg",
-      title: "NNEKA & JORDAN",
-      category: "WEDDINGS",
-      id: 3,
-    },
-    {
-      image: "/assets/client4.jpg",
-      title: "IBUKUN & DOLAPO",
-      category: "ENGAGEMENT",
-      id: 4,
-    },
-    {
-      image: "/assets/client5.jpg",
-      title: "KENECHUKWU & OLOLADE",
-      category: "WEDDINGS",
-      id: 5,
-    },
-    {
-      image: "/assets/childrenandfamily.jpg",
-      title: "WANG FAMILY",
-      category: "CHILDREN AND FAMILY",
-      id: 6,
-    },
-    {
-      image: "/assets/productandlifestyle.jpg",
-      title: "APPLE",
-      category: "PRODUCT AND LIFESTYLE",
-      id: 7,
-    },
-  ];
-
   const [activeCategory, setActiveCategory] = useState<Category>("ALL");
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(
     null
   );
 
-  const filteredItems = galleryItems.filter(
-    (item) => activeCategory === "ALL" || item.category === activeCategory
-  );
+  // Fetch data with both page and category as parameters
+  const {
+    data: clients,
+    isLoading,
+    isError,
+  } = useGetClients({
+    category:
+      activeCategory === "ALL" ? undefined : activeCategory.toLowerCase(),
+    page: currentPage,
+  });
 
-  const totalPages = Math.ceil(filteredItems.length / ITEMS_PER_PAGE);
-
-  const currentItems = filteredItems.slice(
-    (currentPage - 1) * ITEMS_PER_PAGE,
-    currentPage * ITEMS_PER_PAGE
-  );
+  // Filtered items based on fetched data
+  const filteredItems = clients ? clients.data.data : [];
+  const totalPages = clients ? clients.data.data.length : 1;
 
   const handleCategoryChange = (category: Category) => {
     setActiveCategory(category);
-    setCurrentPage(1);
+    setCurrentPage(1); // Reset to first page when category changes
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
   };
 
   return (
     <div>
       <Container className="py-24 lg:mt-24">
-        {/* Header */}
         <div className="mb-20 text-center">
           <h2 className="mb-9 font-serif text-4xl font-extralight tracking-wide text-gray-900">
             Client Area
           </h2>
           <p className="mx-auto max-w-3xl font-light leading-relaxed text-gray-600">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-            nec felis libero. Ut blandit viverra urna quis scelerisque. Praesent
-            non venenatis ex.
+            Every client has a unique story, and we&apos;re here to capture it
+            with authenticity and artistry. From intimate moments to grand
+            celebrations, we create timeless images that reflect your vision.
+            Let&apos;s bring your memories to life.
           </p>
         </div>
 
-        {/* Category Filters */}
         <div className="mb-10 flex text-nowrap hide-scrollbar overflow-scroll md:justify-start space-x-8">
           {categories.map((category) => (
             <button
@@ -131,36 +94,55 @@ const ClientPage = () => {
           ))}
         </div>
 
-        {/* Image Grid */}
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {currentItems.map((item) => (
-            <div
-              key={item.title}
-              onClick={() => setSelectedImageIndex(filteredItems.indexOf(item))}
-              tabIndex={0} // Allows keyboard navigation
-              className="group relative aspect-square w-full overflow-hidden cursor-pointer"
-            >
-              <Image
-                src={item.image || "/placeholder.svg"}
-                alt={item.title}
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-black/20 transition-opacity group-hover:opacity-0" />
-              <div className="absolute inset-0 flex justify-center items-end p-8">
-                <h3 className="font-serif text-xl text-white">{item.title}</h3>
+          {isLoading ? (
+            // Skeleton loader
+            Array.from({ length: ITEMS_PER_PAGE }).map((_, index) => (
+              <div
+                key={index}
+                className="group relative aspect-square w-full overflow-hidden bg-gray-200 animate-pulse"
+              >
+                <div className="h-full w-full bg-gray-300" />
               </div>
-            </div>
-          ))}
+            ))
+          ) : isError ? (
+            <p className="text-red-500">Failed to load clients</p>
+          ) : (
+            filteredItems.map((client) => (
+              <div
+                key={client.id}
+                onClick={() => {
+                  const index = filteredItems.findIndex(
+                    (item) => item.id === client.id
+                  );
+                  setSelectedImageIndex(index);
+                }}
+                tabIndex={0}
+                className="group relative aspect-square w-full overflow-hidden cursor-pointer"
+              >
+                <Image
+                  src={client.images[0].image_url || "/placeholder.svg"}
+                  alt={client.name}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-black/20 transition-opacity group-hover:opacity-0" />
+                <div className="absolute inset-0 flex justify-center items-end p-8">
+                  <h3 className="font-serif text-xl text-white">
+                    {client.name}
+                  </h3>
+                </div>
+              </div>
+            ))
+          )}
         </div>
 
-        {/* Pagination */}
         {totalPages > 1 && (
           <div className="mt-16">
             <Pagination
               currentPage={currentPage}
               totalPages={totalPages}
-              onPageChange={setCurrentPage}
+              onPageChange={handlePageChange}
             />
           </div>
         )}
@@ -168,9 +150,9 @@ const ClientPage = () => {
 
       {selectedImageIndex !== null && (
         <ImageSlider
-          images={filteredItems.map((item) => ({
-            imageUrl: item.image,
-            user: item.title,
+          images={filteredItems.map((item, index) => ({
+            imageUrl: item.images[0].image_url,
+            user: item.name,
             id: item.id,
           }))}
           showDetails={true}
