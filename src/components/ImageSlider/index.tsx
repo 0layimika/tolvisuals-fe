@@ -48,7 +48,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({
       setDirection("next");
       setIsAnimating(true);
       setTimeout(() => {
-        setCurrentIndex(currentIndex + 1); // Directly set number
+        setCurrentIndex(currentIndex + 1); 
         setTimeout(() => setIsAnimating(false), 300);
       }, 10);
     }
@@ -87,13 +87,13 @@ const ImageSlider: React.FC<ImageSliderProps> = ({
 
   return (
     <div
-      className="fixed  inset-0 bg-black/50 backdrop-blur cursor-pointer  flex items-center justify-center z-50 p-4"
+      className="fixed  inset-0 bg-black/50 backdrop-blur cursor-pointer  flex items-center justify-center z-40 p-4"
       onClick={onClose}
     >
       <button
         onClick={prev}
         disabled={currentIndex === 0 || isAnimating}
-        className="bg-white z-30 cursor-pointer flex items-center justify-center absolute top-1/2 transform -translate-y-1/2 p-2 rounded-full md:w-16 md:h-16 w-10 h-10 md:left-8 left-5 shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+        className="bg-white z-[100] cursor-pointer flex items-center justify-center absolute top-1/2 transform -translate-y-1/2 p-2 rounded-full md:w-16 md:h-16 w-10 h-10 md:left-8 left-5 shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -155,7 +155,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({
       <button
         onClick={next}
         disabled={currentIndex === images.length - 1 || isAnimating}
-        className="bg-white z-30 cursor-pointer flex items-center justify-center absolute top-1/2 transform -translate-y-1/2 p-2 rounded-full md:w-16 md:h-16 w-10 h-10 md:right-8 right-5 shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+        className="bg-white z-[100] cursor-pointer flex items-center justify-center absolute top-1/2 transform -translate-y-1/2 p-2 rounded-full md:w-16 md:h-16 w-10 h-10 md:right-8 right-5 shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

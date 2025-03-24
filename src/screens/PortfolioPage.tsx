@@ -14,7 +14,7 @@ const subtitleMap: Record<string, string> = {
 };
 
 const PortfolioPage = () => {
-  const { data: portfolio } = usePortfolio();
+  const { data: portfolio, isLoading } = usePortfolio();
 
   return (
     <div>
@@ -44,6 +44,7 @@ const PortfolioPage = () => {
           {portfolio?.data.map((item, index) => (
             <PortfolioItem
               key={index}
+              isLoading={isLoading}
               image={item.image_url}
               title={item.category}
               subtitle={subtitleMap[item.category] || "A MOMENT TO REMEMBER"}

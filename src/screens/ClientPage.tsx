@@ -39,7 +39,6 @@ const ClientPage = () => {
     null
   );
 
-  // Fetch data with both page and category as parameters
   const {
     data: clients,
     isLoading,
@@ -50,7 +49,6 @@ const ClientPage = () => {
     page: currentPage,
   });
 
-  // Filtered items based on fetched data
   const filteredItems = clients ? clients.data.data : [];
   const totalPages = clients ? clients.data.data.length : 1;
 
