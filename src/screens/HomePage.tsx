@@ -38,6 +38,8 @@ const HomePage = () => {
   };
 
   const { data: homeContent } = useGetHomeContent();
+
+
   useEffect(() => {
     if (homeContent?.data) {
       setImages([

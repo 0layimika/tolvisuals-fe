@@ -2,7 +2,6 @@
 import Link, { LinkProps } from "next/link";
 import React, { ReactNode } from "react";
 import { useRouter } from "next/navigation";
-import { resolve } from "path";
 
 interface Props extends LinkProps {
   children: ReactNode;

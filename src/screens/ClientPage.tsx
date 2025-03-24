@@ -150,7 +150,7 @@ const ClientPage = () => {
 
       {selectedImageIndex !== null && (
         <ImageSlider
-          images={filteredItems.map((item, index) => ({
+          images={filteredItems.map((item) => ({
             imageUrl: item.images[0].image_url,
             user: item.name,
             id: item.id,

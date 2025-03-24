@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 
 const apiClient = new APIClient<GenericResponse<PortfolioItem[]>>("/portfolio");
 
-export const usePortfolio = (filters?: Record<string, any>) => {
+export const usePortfolio = (filters?: Record<string, string>) => {
   return useQuery({
     queryKey: ["portfolioContent", apiClient.endpoint, filters],
     queryFn: () => apiClient.get(filters),

@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 
 interface ImageData {
   imageUrl: string;
-  user: string;
+  user?: string;
   id: number;
 }
 
@@ -31,13 +31,16 @@ const ImageSlider: React.FC<ImageSliderProps> = ({
   const [direction, setDirection] = useState<"next" | "prev">("next");
   const router = useRouter();
 
-  const preloadImage = (index: number) => {
-    const image = images[index];
-    if (image) {
-      const img = new window.Image();
-      img.src = image.imageUrl;
-    }
-  };
+  const preloadImage = useCallback(
+    (index: number) => {
+      const image = images[index];
+      if (image) {
+        const img = new window.Image();
+        img.src = image.imageUrl;
+      }
+    },
+    [images]
+  );
 
   const next = useCallback(() => {
     if (currentIndex < images.length - 1 && !isAnimating) {
@@ -45,11 +48,11 @@ const ImageSlider: React.FC<ImageSliderProps> = ({
       setDirection("next");
       setIsAnimating(true);
       setTimeout(() => {
-        setCurrentIndex(currentIndex + 1);
+        setCurrentIndex(currentIndex + 1); // Directly set number
         setTimeout(() => setIsAnimating(false), 300);
       }, 10);
     }
-  }, [currentIndex, images.length, isAnimating, setCurrentIndex]);
+  }, [preloadImage, currentIndex, setCurrentIndex, images.length, isAnimating]);
 
   const prev = useCallback(() => {
     if (currentIndex > 0 && !isAnimating) {
@@ -57,11 +60,11 @@ const ImageSlider: React.FC<ImageSliderProps> = ({
       setDirection("prev");
       setIsAnimating(true);
       setTimeout(() => {
-        setCurrentIndex(currentIndex - 1);
+        setCurrentIndex(currentIndex - 1); // Directly set number
         setTimeout(() => setIsAnimating(false), 300);
       }, 10);
     }
-  }, [currentIndex, isAnimating, setCurrentIndex]);
+  }, [preloadImage, currentIndex, setCurrentIndex, isAnimating]);
 
   const handleKeydown = useCallback(
     (e: KeyboardEvent) => {
@@ -122,7 +125,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({
             >
               <Image
                 src={images[currentIndex].imageUrl}
-                alt={images[currentIndex].user}
+                alt={images[currentIndex].user ?? "Client Image"}
                 layout="fill"
                 objectFit="cover"
                 className="rounded-md"

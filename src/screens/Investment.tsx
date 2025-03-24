@@ -1,22 +1,11 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import Link from "next/link";
 import InvestmentItem from "@/components/InvesmentItem";
 import Container from "@/components/Container";
 import TransitionLink from "@/components/TransitionLink";
 import { useGetFaq } from "@/hooks/useGetFaqs";
 
-interface FAQResponse {
-  message: string;
-  data: FAQItem[];
-}
-
-interface FAQItem {
-  id: number;
-  question: string;
-  answer: string;
-}
 
 const InvesmentPage = () => {
   const { data: faqs } = useGetFaq();

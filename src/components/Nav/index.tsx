@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
@@ -82,7 +81,11 @@ const Nav = () => {
             animate={mobileNavOpen ? { rotateZ: 45, y: 6 } : {}}
             style={{
               backgroundColor:
-                mobileNavOpen || darkPaths.includes(pathname) ? "#000" : "#fff",
+                mobileNavOpen ||
+                darkPaths.includes(pathname) ||
+                pathname.startsWith("/clients")
+                  ? "#000"
+                  : "#fff",
             }}
             className="w-full h-[1.5px] transition-all duration-300"
           ></motion.div>
@@ -94,7 +97,10 @@ const Nav = () => {
                 : { opacity: 1, transition: { delay: 0.3 } }
             }
             style={{
-              backgroundColor: darkPaths.includes(pathname) ? "#000" : "#fff",
+              backgroundColor:
+                darkPaths.includes(pathname) || pathname.startsWith("/clients")
+                  ? "#000"
+                  : "#fff",
             }}
             className="w-full h-[1.5px] transition-all duration-300"
           ></motion.div>
@@ -103,7 +109,11 @@ const Nav = () => {
             animate={mobileNavOpen ? { rotateZ: -45, y: -4 } : {}}
             style={{
               backgroundColor:
-                mobileNavOpen || darkPaths.includes(pathname) ? "#000" : "#fff",
+                mobileNavOpen ||
+                darkPaths.includes(pathname) ||
+                pathname.startsWith("/clients")
+                  ? "#000"
+                  : "#fff",
             }}
             className="w-full h-[1.5px] transition-all duration-300"
           ></motion.div>
