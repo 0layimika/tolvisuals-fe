@@ -31,7 +31,7 @@ const AboutPage = () => {
   };
 
   const { data: aboutContent } = useGetAboutContent();
-  const { data: testimonialsData } = useGetReviews();
+  const { data: testimonialsData, isLoading } = useGetReviews();
 
   useEffect(() => {
     if (aboutContent?.data) {
@@ -85,76 +85,113 @@ const AboutPage = () => {
           </div>
         </div>
         <div className="lg:pt-24 pt-32">
-          <h2 className="lg:mb-28 lg:hidden font-serif mb-8 font-light tracking-wide text-gray-900 text-3xl">
-            Testimonials
-          </h2>
-          <div className="grid gap-12 md:grid-cols-2 grid-cols-1 md:gap-24">
-            <div className="flex order-2 lg:order-1 flex-col">
-              <div className="flex-1 order-2 lg:order-1">
-                <h2 className="lg:mb-28 lg:block hidden mb-14 font-serif font-light tracking-wide text-gray-900 text-3xl">
-                  Testimonials
-                </h2>
-                <div className="space-y-8">
-                  {testimonials.length > 0 && (
-                    <p className="font-serif text-2xl font-light leading-normal text-gray-800">
-                      &apos;{testimonials[currentSlide].comment}&apos;
-                    </p>
-                  )}
-                  <p className="text-sm font-light tracking-wide text-gray-600">
-                    — {testimonials[currentSlide]?.name}
-                  </p>
+          {isLoading ? (
+            <div className="animate-pulse">
+
+              <div className="grid gap-12 md:grid-cols-2 grid-cols-1 md:gap-24">
+                <div className="flex order-2 lg:order-1 flex-col">
+                  <div className="flex-1 order-2 lg:order-1">
+                    <div className="lg:mb-28 mb-8 h-8 w-40 bg-gray-300 rounded " />
+
+                    <div className="space-y-8">
+                      <div className="h-4 bg-gray-300 rounded w-4/5" />
+                      <div className="h-4 bg-gray-300 rounded w-4/5" />
+
+                      <div className="h-3 bg-gray-300 rounded w-2/5" />
+                    </div>
+                  </div>
+
+                  <div className="py-3 flex order-1 lg:order-2 lg:flex-col flex-row lg:gap-2 gap-5 ">
+                    <div className="h-6 w-6 bg-gray-300 rounded-full" />
+                    <div className="h-4 w-10 bg-gray-300 rounded" />
+                    <div className="h-6 w-6 bg-gray-300 rounded-full" />
+                  </div>
+                </div>
+
+                <div className="relative aspect-[4/5] order-1 lg:order-2 w-full overflow-hidden">
+                  <div className="w-full h-full bg-gray-300 rounded-md" />
                 </div>
               </div>
-              <div className="py-3 flex order-1 lg:order-2 lg:flex-col flex-row lg:gap-2 gap-5">
-                <button
-                  onClick={prevSlide}
-                  className="text-gray-800 cursor-pointer transition-colors hover:text-gray-600"
-                  aria-label="Previous testimonial"
-                >
-                  <Image
-                    src="/assets/arrowLeftBlack.svg"
-                    alt="prev"
-                    width={25}
-                    height={25}
-                  />
-                </button>
-                <p className="text-sm text-[#807c7c] italic font-serif font-light">
-                  {String(currentSlide + 1).padStart(2, "0")} /{" "}
-                  {String(testimonials.length).padStart(2, "0")}
-                </p>
-                <button
-                  onClick={nextSlide}
-                  className="text-gray-800 cursor-pointer transition-colors hover:text-gray-600"
-                  aria-label="Next testimonial"
-                >
-                  <Image
-                    src="/assets/arrowRightBlack.svg"
-                    alt="next"
-                    width={25}
-                    height={25}
-                  />
-                </button>
+
+              <div className="mt-24 flex justify-center">
+                <div className="bg-gray-300 h-10 w-40 rounded-md" />
               </div>
             </div>
-            <div className="relative aspect-[4/5] order-1 lg:order-2 w-full overflow-hidden">
-              <Image
-                src={
-                  testimonials[currentSlide]?.image_url || "/placeholder.svg"
-                }
-                alt={`Testimonial by ${testimonials[currentSlide]?.name}`}
-                fill
-                className="object-cover"
-              />
-            </div>
-          </div>
-          <div className="mt-24 flex justify-center">
-            <TransitionLink
-              href="/contact"
-              className="bg-[#BEB3A7] font-serif px-8 py-3 text-sm font-light tracking-wide text-white hover:bg-[#807c7c] transition-colors ease-in-out duration-300"
-            >
-              Contact Me
-            </TransitionLink>
-          </div>
+          ) : (
+            <>
+              <h2 className="lg:mb-28 lg:hidden font-serif mb-8 font-light tracking-wide text-gray-900 text-3xl">
+                Testimonials
+              </h2>
+              <div className="grid gap-12 md:grid-cols-2 grid-cols-1 md:gap-24">
+                <div className="flex order-2 lg:order-1 flex-col">
+                  <div className="flex-1 order-2 lg:order-1">
+                    <h2 className="lg:mb-28 lg:block hidden mb-14 font-serif font-light tracking-wide text-gray-900 text-3xl">
+                      Testimonials
+                    </h2>
+                    <div className="space-y-8">
+                      {testimonials.length > 0 && (
+                        <p className="font-serif text-2xl font-light leading-normal text-gray-800">
+                          &apos;{testimonials[currentSlide].comment}&apos;
+                        </p>
+                      )}
+                      <p className="text-sm font-light tracking-wide text-gray-600">
+                        — {testimonials[currentSlide]?.name}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="py-3 flex order-1 lg:order-2 lg:flex-col flex-row lg:gap-2 gap-5">
+                    <button
+                      onClick={prevSlide}
+                      className="text-gray-800 cursor-pointer transition-colors hover:text-gray-600"
+                      aria-label="Previous testimonial"
+                    >
+                      <Image
+                        src="/assets/arrowLeftBlack.svg"
+                        alt="prev"
+                        width={25}
+                        height={25}
+                      />
+                    </button>
+                    <p className="text-sm text-[#807c7c] italic font-serif font-light">
+                      {String(currentSlide + 1).padStart(2, "0")} /{" "}
+                      {String(testimonials.length).padStart(2, "0")}
+                    </p>
+                    <button
+                      onClick={nextSlide}
+                      className="text-gray-800 cursor-pointer transition-colors hover:text-gray-600"
+                      aria-label="Next testimonial"
+                    >
+                      <Image
+                        src="/assets/arrowRightBlack.svg"
+                        alt="next"
+                        width={25}
+                        height={25}
+                      />
+                    </button>
+                  </div>
+                </div>
+                <div className="relative aspect-[4/5] order-1 lg:order-2 w-full overflow-hidden">
+                  <Image
+                    src={
+                      testimonials[currentSlide]?.image_url ||
+                      "/placeholder.svg"
+                    }
+                    alt={`Testimonial by ${testimonials[currentSlide]?.name}`}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+              <div className="mt-24 flex justify-center">
+                <TransitionLink
+                  href="/contact"
+                  className="bg-[#BEB3A7] font-serif px-8 py-3 text-sm font-light tracking-wide text-white hover:bg-[#807c7c] transition-colors ease-in-out duration-300"
+                >
+                  Contact Me
+                </TransitionLink>
+              </div>
+            </>
+          )}
         </div>
       </Container>
     </div>

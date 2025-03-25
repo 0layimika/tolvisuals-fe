@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 interface Props {
   title: string;
@@ -55,9 +56,9 @@ const InvestmentItem = ({
           </div>
           <div>
             <div className="my-4 h-px w-full  bg-gray-200"></div>
-            <p className="inline-block font-serif   w-full pb-1 text-sm tracking-[0.2em] text-gray-900 transition-colors hover:text-gray-600">
+            <Link href={'/contact'} className="inline-block font-serif   w-full pb-1 text-sm tracking-[0.2em] text-gray-900 transition-colors hover:text-gray-600">
               {footerText}
-            </p>
+            </Link>
           </div>
         </div>
 

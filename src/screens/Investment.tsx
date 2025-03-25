@@ -6,9 +6,8 @@ import Container from "@/components/Container";
 import TransitionLink from "@/components/TransitionLink";
 import { useGetFaq } from "@/hooks/useGetFaqs";
 
-
 const InvesmentPage = () => {
-  const { data: faqs } = useGetFaq();
+  const { data: faqs, isLoading } = useGetFaq();
 
   return (
     <div>
@@ -91,16 +90,29 @@ const InvesmentPage = () => {
           </div>
 
           <div className="grid gap-x-24 lg:px-10 gap-y-16 md:grid-cols-2">
-            {faqs?.data.map((faq) => (
-              <div key={faq.id} className="space-y-4">
-                <h3 className="font-serif text-2xl font-light leading-snug text-gray-900">
-                  {faq.question}
-                </h3>
-                <p className="font-light leading-relaxed text-gray-600">
-                  {faq.answer}
-                </p>
-              </div>
-            ))}
+            {isLoading
+              ? // Skeleton Loader
+                Array.from({ length: 3 }).map((_, index) => (
+                  <div key={index} className="space-y-4 animate-pulse">
+                    {/* Skeleton for FAQ Question */}
+                    <div className="h-6 bg-gray-300 rounded w-3/4" />
+                    {/* Skeleton for FAQ Answer */}
+                    <div className="h-4 bg-gray-300 rounded w-full" />
+                    <div className="h-4 bg-gray-300 rounded w-5/6" />
+                    <div className="h-4 bg-gray-300 rounded w-2/3" />
+                  </div>
+                ))
+              : // Actual FAQ Content
+                faqs?.data.map((faq) => (
+                  <div key={faq.id} className="space-y-4">
+                    <h3 className="font-serif text-2xl font-light leading-snug text-gray-900">
+                      {faq.question}
+                    </h3>
+                    <p className="font-light leading-relaxed text-gray-600">
+                      {faq.answer}
+                    </p>
+                  </div>
+                ))}
           </div>
 
           <div className="my-24 h-px w-full max-w-[400px] mx-auto bg-gray-200" />

@@ -94,7 +94,6 @@ const ClientPage = () => {
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {isLoading ? (
-            // Skeleton loader
             Array.from({ length: ITEMS_PER_PAGE }).map((_, index) => (
               <div
                 key={index}
