@@ -1,4 +1,3 @@
-import { SubmitReview } from "@/data";
 import { APIClient } from "@/service/apiClient";
 import { useMutation } from "@tanstack/react-query";
 
