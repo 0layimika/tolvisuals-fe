@@ -79,4 +79,5 @@ export interface SubmitReview {
   name: string;
   image: File | null;
   comment: string;
+  formData: FormData;
 }

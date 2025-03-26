@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Montserrat, Playfair_Display } from "next/font/google";
+import { Geist, Montserrat } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import InstagramSection from "@/components/InstagramSection";
@@ -30,7 +30,7 @@ export default function RootLayout({
     <ReactQueryClientProvider>
       <html lang="en">
         <body
-          className={`${geistSans.variable} ${montserrat.variable} antialiased`}
+          className={`${geistSans.variable} ${montserrat.variable} font-[var(--font-montserrat)] antialiased`}
         >
           <Nav />
           {children}

@@ -3,7 +3,7 @@ import { APIClient } from "@/service/apiClient";
 import { useMutation } from "@tanstack/react-query";
 
 const apiClient = new APIClient("/review");
-const register = (data: SubmitReview) => {
+const register = (data: FormData) => {
   return apiClient.submitReview(data);
 };
 

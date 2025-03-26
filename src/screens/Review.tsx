@@ -17,7 +17,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { useSubmitReviews } from "@/hooks/useSubmitReview";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import * as z from "zod";
 import TransitionLink from "@/components/TransitionLink";
@@ -30,11 +29,9 @@ const formSchema = z.object({
   photoPermission: z.enum(["yes", "no"], {
     required_error: "Please indicate if we can share your photos",
   }),
-  // We don't validate the image since it's optional
 });
 
 export default function ReviewSubmissionForm() {
-  const router = useRouter();
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -51,10 +48,8 @@ export default function ReviewSubmissionForm() {
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      // Store the file for submission
       setSelectedFile(file);
 
-      // Create preview
       const reader = new FileReader();
       reader.onloadend = () => {
         setImagePreview(reader.result as string);
@@ -70,36 +65,28 @@ export default function ReviewSubmissionForm() {
 
   const { mutate: submitReviews, isPending } = useSubmitReviews();
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    // Create FormData to handle file upload
+  const onSubmit = (values: z.infer<typeof formSchema>) => {
     const formData = new FormData();
     formData.append("name", values.name);
     formData.append("comment", values.reviewText);
     formData.append("photoPermission", values.photoPermission);
 
-    // Only append the file if one was selected
     if (selectedFile) {
       formData.append("image", selectedFile);
     }
+    console.log("This is the selected file", selectedFile);
+    console.log(formData);
 
-    // Call the submit function with the proper data structure
-    submitReviews(
-      {
-        name: values.name,
-        comment: values.reviewText,
-        image: selectedFile, // Pass the actual file
+    submitReviews(formData,  {
+        
+      onSuccess: () => {
+        setSubmitSuccess(true);
       },
-      {
-        onSuccess: () => {
-          setSubmitSuccess(true);
-        },
-        onError: (error) => {
-          console.error("Error submitting review:", error);
-          // You could add error handling UI here if needed
-        },
-      }
-    );
-  }
+      onError: (error) => {
+        console.error("Error submitting review:", error);
+      },
+    });
+  };
 
   return (
     <>

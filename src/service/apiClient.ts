@@ -16,10 +16,12 @@ export class APIClient<T> {
     const response = await axiosInstance.get<T>(url, { params });
     return response.data;
   }
-  
+
   async submitReview(data: T) {
     return await axiosInstance
-      .post(this.endpoint, data)
+      .post(this.endpoint, data, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
       .then((res) => res.data)
       .catch((err) => {
         throw err;
