@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Playfair_Display } from "next/font/google";
+import { Geist, Montserrat, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import InstagramSection from "@/components/InstagramSection";
@@ -11,9 +11,9 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-const playfairDisplay = Playfair_Display({
-  variable: "--font-playfair-display",
-  subsets: ["latin", "latin-ext", "cyrillic", "vietnamese"],
+const montserrat = Montserrat({
+  variable: "--montserrat",
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -30,7 +30,7 @@ export default function RootLayout({
     <ReactQueryClientProvider>
       <html lang="en">
         <body
-          className={`${geistSans.variable} ${playfairDisplay.variable} antialiased`}
+          className={`${geistSans.variable} ${montserrat.variable} antialiased`}
         >
           <Nav />
           {children}

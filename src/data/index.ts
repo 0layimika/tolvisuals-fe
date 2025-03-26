@@ -74,3 +74,9 @@ export interface Review {
   comment: string;
   image_url: string;
 }
+
+export interface SubmitReview {
+  name: string;
+  image: File | null;
+  comment: string;
+}

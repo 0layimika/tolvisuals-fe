@@ -37,7 +37,7 @@ const ClientPictures = () => {
         )}
       </h2>
 
-      <div className="grid gap-4 max-w-[1600px] px-7 mx-auto md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 max-w-7xl px-7 mx-auto md:grid-cols-2 lg:grid-cols-4">
         {isLoading || isFetching
           ? [...Array(5)].map((_, index) => <SkeletonLoader key={index} />)
           : clientImages.map((client) => (

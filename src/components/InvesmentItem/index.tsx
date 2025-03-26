@@ -33,7 +33,7 @@ const InvestmentItem = ({
             src={image || "/placeholder.svg"}
             alt="Portrait package"
             fill
-            className="object-cover"
+            className="object-cover max-h-[600px]"
             priority
           />
         </div>

@@ -8,7 +8,7 @@ import TransitionLink from "../TransitionLink";
 
 const Nav = () => {
   const navLinks = [
-    { name: "Home", route: "/" },
+    { name: "Home", route: "/home" },
     { name: "About", route: "/about" },
     { name: "Portfolio", route: "/portfolio" },
     { name: "Investment", route: "/investment" },
@@ -25,6 +25,7 @@ const Nav = () => {
     "/portfolio/children-and-family",
     "/portfolio/products-and-lifestyle",
     "/portfolio/portraits",
+    "/reviews"
   ];
 
   useEffect(() => {
@@ -52,7 +53,7 @@ const Nav = () => {
           ))}
         </div>
 
-        <TransitionLink href="/" className="text-2xl italic font-light">
+        <TransitionLink href="/home" className="text-2xl italic font-light">
           <Image src={"/assets/logoo.svg"} width={80} height={80} alt="logo" />
         </TransitionLink>
 
