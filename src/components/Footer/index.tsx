@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Container from "../Container";
 import TransitionLink from "../TransitionLink";
+import Link from "next/link";
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -52,7 +53,6 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Back to top button */}
           <button
             onClick={scrollToTop}
             className="text-gray-800 hover:text-gray-600"
@@ -67,17 +67,16 @@ export default function Footer() {
           </button>
         </div>
 
-        {/* Bottom border */}
         <div className="border-t border-gray-200"></div>
 
-        {/* Copyright and social */}
         <div className="flex sm:flex-row flex-col sm:items-center gap-5 justify-between md:pt-12 pt-8">
           <p className="text-xs order-2 sm:order-1 font-light text-gray-800">
             All content Copyright © {new Date().getFullYear()} Ayo Ayo
           </p>
 
           <div className="flex order-1 sm:order-2 items-center space-x-6">
-            <TransitionLink
+            <Link
+              target="_blank"
               href="https://www.instagram.com/tolvisuals/?igsh=ZjBoeHF3dzE4c3Fp"
               className="text-gray-800 hover:text-gray-600"
               aria-label="Instagram"
@@ -88,8 +87,9 @@ export default function Footer() {
                 width={25}
                 height={25}
               />
-            </TransitionLink>
-            <TransitionLink
+            </Link>
+            <Link
+              target="_blank"
               href="https://linkedin.com"
               className="text-gray-800 hover:text-gray-600"
               aria-label="LinkedIn"
@@ -100,15 +100,35 @@ export default function Footer() {
                 width={25}
                 height={25}
               />
-            </TransitionLink>
+            </Link>
+            <Link
+              target="_blank"
+              href="https://linkedin.com"
+              className="text-gray-800 hover:text-gray-600"
+              aria-label="LinkedIn"
+            >
+              <Image
+                src={"/assets/tiktok.svg"}
+                alt="arrow"
+                width={25}
+                height={25}
+              />
+            </Link>
+            <Link
+              target="_blank"
+              href="https://linkedin.com"
+              className="text-gray-800 hover:text-gray-600"
+              aria-label="LinkedIn"
+            >
+              <Image
+                src={"/assets/youtube.svg"}
+                alt="arrow"
+                width={25}
+                height={25}
+              />
+            </Link>
           </div>
         </div>
-
-        {/* <div className="flex justify-center pt-12">
-          <div className="flex h-8 w-8 items-center justify-center border border-gray-300">
-            <span className="text-xs font-light text-gray-800">P</span>
-          </div>
-        </div> */}
       </Container>
     </footer>
   );
