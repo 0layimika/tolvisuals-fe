@@ -76,7 +76,7 @@ export interface SubmitReview {
 export interface Blog {
   id: number;
   title: string;
-  thumbnail: string;
+  thumbmail: string;
   date: string;
   content: string;
 }

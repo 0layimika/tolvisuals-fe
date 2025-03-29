@@ -23,17 +23,17 @@ const PerBlogsPage = () => {
         )}
       </h2>
 
-      <div className="">
+      <div className="flex justify-center mb-10">
         {isLoading ? (
-          <div className="h-[600px] w-4/5 my-7  mx-auto bg-gray-300 rounded animate-pulse"></div>
+          <div className="h-[50vh] w-full max-w-[1250px] mx-auto bg-gray-300 rounded animate-pulse"></div>
         ) : data?.data ? (
           <Image
-            src={data?.data.thumbnail ?? "/assets/placeholder.jpg"}
+            src={data?.data.thumbmail ?? "/assets/placeholder.jpg"}
             alt={data?.data.title + " image"}
             priority
-            width={600}
-            height={450}
-            className="w-full h-full object-cover"
+            width={1600}
+            height={600} 
+            className="w-full max-w-[1250px] h-[50vh] object-cover sm:h-[40vh] md:h-[50vh] lg:h-[60vh] xl:h-[70vh]"
           />
         ) : null}
       </div>

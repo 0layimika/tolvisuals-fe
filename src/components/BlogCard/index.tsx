@@ -26,7 +26,7 @@ export default function BlogCard({
     >
       <div className="p-6 pb-4 flex-1">
         <div className="mb-4 flex items-center justify-between">
-          <span className="font-medium text-gray-800 font-serif">
+          <span className="font-medium text-gray-800 font-montserrat">
             TOL VISUALS
           </span>
           <span className="text-sm text-gray-500">{formatDate(date)}</span>
