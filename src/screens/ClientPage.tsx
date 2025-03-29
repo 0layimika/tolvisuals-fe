@@ -54,7 +54,7 @@ const ClientPage = () => {
 
   const handleCategoryChange = (category: Category) => {
     setActiveCategory(category);
-    setCurrentPage(1); // Reset to first page when category changes
+    setCurrentPage(1); 
   };
 
   const handlePageChange = (page: number) => {

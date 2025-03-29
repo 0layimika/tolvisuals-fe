@@ -25,7 +25,8 @@ const Nav = () => {
     "/portfolio/children-and-family",
     "/portfolio/products-and-lifestyle",
     "/portfolio/portraits",
-    "/reviews"
+    "/reviews",
+    "/blogs",
   ];
 
   useEffect(() => {
@@ -63,7 +64,9 @@ const Nav = () => {
               key={navItem.route}
               href={navItem.route}
               className={`font-light ${
-                darkPaths.includes(pathname) || pathname.startsWith("/clients")
+                darkPaths.includes(pathname) ||
+                pathname.startsWith("/clients") ||
+                pathname.startsWith("/blogs")
                   ? "text-[#000] hover:text-[000]/80"
                   : "text-white hover:text-white/80"
               }`}
@@ -84,7 +87,8 @@ const Nav = () => {
               backgroundColor:
                 mobileNavOpen ||
                 darkPaths.includes(pathname) ||
-                pathname.startsWith("/clients")
+                pathname.startsWith("/clients") ||
+                pathname.startsWith("/blogs")
                   ? "#000"
                   : "#fff",
             }}
@@ -99,7 +103,9 @@ const Nav = () => {
             }
             style={{
               backgroundColor:
-                darkPaths.includes(pathname) || pathname.startsWith("/clients")
+                darkPaths.includes(pathname) ||
+                pathname.startsWith("/clients") ||
+                pathname.startsWith("/blogs")
                   ? "#000"
                   : "#fff",
             }}
@@ -112,7 +118,8 @@ const Nav = () => {
               backgroundColor:
                 mobileNavOpen ||
                 darkPaths.includes(pathname) ||
-                pathname.startsWith("/clients")
+                pathname.startsWith("/clients") ||
+                pathname.startsWith("/blogs")
                   ? "#000"
                   : "#fff",
             }}

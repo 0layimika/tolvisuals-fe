@@ -33,15 +33,6 @@ export interface ClientsResponseData {
   data: ClientData[];
 }
 
-export interface ClientsResponse {
-  message: string;
-  total_pages: number;
-  current_page: number;
-  next: string | null;
-  previous: string | null;
-  data: ClientsResponseData;
-}
-
 export type SingleClientResponse = {
   message: string;
   client_name: string;
@@ -80,4 +71,21 @@ export interface SubmitReview {
   image: File | null;
   comment: string;
   formData: FormData;
+}
+
+export interface Blog {
+  id: number;
+  title: string;
+  thumbnail: string;
+  date: string;
+  content: string;
+}
+
+export interface PaginatedResponse<T> {
+  message: string;
+  total_pages: number;
+  current_page: number;
+  next: string | null;
+  previous: string | null;
+  data: T;
 }

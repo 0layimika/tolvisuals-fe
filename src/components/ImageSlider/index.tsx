@@ -131,6 +131,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({
                 className="rounded-md"
                 priority
               />
+              <div className="absolute inset-0 bg-black/50" />
             </motion.div>
           </AnimatePresence>
 
@@ -143,7 +144,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({
                 onClick={() =>
                   router.push(`${"/clients/" + images[currentIndex].id}`)
                 }
-                className="bg-white  hover:bg-black/70 hover:text-white/70 transition-colors duration-300 ease-in-out cursor-pointer py-2 px-4 font-serif font-light text-sm"
+                className="bg-white  hover:bg-black/70 hover:text-white transition-colors duration-300 ease-in-out cursor-pointer py-2 px-4 font-serif font-light text-sm"
               >
                 View Gallery
               </button>

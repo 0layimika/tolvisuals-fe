@@ -27,7 +27,7 @@ const PortfolioPage = () => {
           className="object-cover"
         />
 
-        <div className="absolute inset-0 bg-black/20" />
+        <div className="absolute inset-0 bg-black/50" />
 
         <div className="absolute font-serif inset-0 flex flex-col items-center justify-center ">
           <h1 className="font-serif text-3xl font-light tracking-wide text-white md:text-6xl lg:text-5xl">

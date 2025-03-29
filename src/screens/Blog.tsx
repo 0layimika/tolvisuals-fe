@@ -1,13 +1,15 @@
 "use client";
-import React from "react";
-import Image from "next/image";
-import InvestmentItem from "@/components/InvesmentItem";
+import BlogCard from "@/components/BlogCard";
 import Container from "@/components/Container";
 import TransitionLink from "@/components/TransitionLink";
+import { useGetBlog } from "@/hooks/useGetBlog";
 import { useGetFaq } from "@/hooks/useGetFaqs";
+import Image from "next/image";
 
-const InvesmentPage = () => {
+const BlogsPage = () => {
   const { data: faqs, isLoading } = useGetFaq();
+
+  const { data: blogs } = useGetBlog();
 
   return (
     <div>
@@ -20,23 +22,23 @@ const InvesmentPage = () => {
           className="object-cover"
         />
 
-        <div className="absolute inset-0 bg-black/20" />
+        <div className="absolute inset-0 bg-black/50" />
 
         <div className="absolute font-serif inset-0 flex flex-col items-center justify-center">
           <h1 className="font-serif text-3xl font-light tracking-wide text-white md:text-6xl lg:text-5xl">
-            Investment
+            Blogs & Newsletters
           </h1>
-          <p className="mt-4 text-sm capitalize font-light tracking-[0.2em] text-white/90">
-            PRESERVE YOUR BEST MEMORIES
+          <p className="mt-4  text-sm capitalize font-light tracking-[0.2em] text-white/90">
+            CAPTURE STORIES, INSPIRE MINDS
           </p>
         </div>
       </section>
       <Container className="py-24">
-        <h2 className="lg:mb-16 mb-10 lg:text-center  font-serif text-2xl lg:text-4xl font-light tracking-wide text-gray-900 md:text-5xl">
-          Pricing & Packages
-        </h2>
+        {/* <h2 className="lg:mb-16 mb-10 lg:text-center  font-serif text-2xl lg:text-4xl font-light tracking-wide text-gray-900 md:text-5xl">
+          Blogs
+        </h2> */}
 
-        <div className="space-y-16">
+        {/* <div className="space-y-16">
           <InvestmentItem
             description={[
               "Timeless and elegant portraits that beautifully tell your story. We bring your ideas and dreams to life.",
@@ -79,6 +81,19 @@ const InvesmentPage = () => {
             image="/assets/productandlifestyle.jpg"
             title="PRODUCTS AND LIFESTYLE"
           />
+        </div> */}
+
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {blogs?.data.map((post, index) => (
+            <BlogCard
+              key={index}
+              date={post.date}
+              href={`/blogs/${post.id}`}
+              imageUrl={post.thumbnail}
+              source=""
+              title={post.title}
+            />
+          ))}
         </div>
 
         <div className=" py-24">
@@ -91,19 +106,15 @@ const InvesmentPage = () => {
 
           <div className="grid gap-x-24 lg:px-10 gap-y-16 md:grid-cols-2">
             {isLoading
-              ? // Skeleton Loader
-                Array.from({ length: 3 }).map((_, index) => (
+              ? Array.from({ length: 3 }).map((_, index) => (
                   <div key={index} className="space-y-4 animate-pulse">
-                    {/* Skeleton for FAQ Question */}
                     <div className="h-6 bg-gray-300 rounded w-3/4" />
-                    {/* Skeleton for FAQ Answer */}
                     <div className="h-4 bg-gray-300 rounded w-full" />
                     <div className="h-4 bg-gray-300 rounded w-5/6" />
                     <div className="h-4 bg-gray-300 rounded w-2/3" />
                   </div>
                 ))
-              : // Actual FAQ Content
-                faqs?.data.map((faq) => (
+              : faqs?.data.map((faq) => (
                   <div key={faq.id} className="space-y-4">
                     <h3 className="font-serif text-2xl font-light leading-snug text-gray-900">
                       {faq.question}
@@ -134,4 +145,4 @@ const InvesmentPage = () => {
   );
 };
 
-export default InvesmentPage;
+export default BlogsPage;

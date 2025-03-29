@@ -91,7 +91,7 @@ const HomePage = () => {
         <div className="h-full w-full">
           {isLoading ? (
             <div className="absolute inset-0 flex items-center justify-center bg-black/20">
-              <div className="animate-pulse bg-black/40 h-full w-full" />
+              <div className="animate-pulse bg-black/50 h-full w-full" />
             </div>
           ) : (
             images.map((slide, index) => (
