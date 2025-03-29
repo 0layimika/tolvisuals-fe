@@ -9,7 +9,7 @@ import Image from "next/image";
 const BlogsPage = () => {
   const { data: faqs, isLoading } = useGetFaq();
 
-  const { data: blogs } = useGetBlog();
+  const { data: blogs, isLoading: isBlogLoading } = useGetBlog();
 
   return (
     <div>
@@ -84,15 +84,24 @@ const BlogsPage = () => {
         </div> */}
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {blogs?.data.map((post, index) => (
-            <BlogCard
-              key={index}
-              date={post.date}
-              href={`/blogs/${post.id}`}
-              imageUrl={post.thumbnail ?? "/assets/placeholder.jpg"}
-              title={post.title}
-            />
-          ))}
+          {isBlogLoading
+            ? Array.from({ length: 4 }).map((_, index) => (
+                <div
+                  key={index}
+                  className="group relative rounded-lg aspect-square w-full overflow-hidden bg-gray-200 animate-pulse"
+                >
+                  <div className="h-full w-full bg-gray-300" />
+                </div>
+              ))
+            : blogs?.data.map((post, index) => (
+                <BlogCard
+                  key={index}
+                  date={post.date}
+                  href={`/blogs/${post.id}`}
+                  imageUrl={post.thumbnail ?? "/assets/placeholder.jpg"}
+                  title={post.title}
+                />
+              ))}
         </div>
 
         <div className=" py-24">
