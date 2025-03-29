@@ -89,8 +89,7 @@ const BlogsPage = () => {
               key={index}
               date={post.date}
               href={`/blogs/${post.id}`}
-              imageUrl={post.thumbnail}
-              source=""
+              imageUrl={post.thumbnail ?? "/assets/placeholder.jpg"}
               title={post.title}
             />
           ))}

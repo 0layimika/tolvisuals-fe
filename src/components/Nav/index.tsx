@@ -11,14 +11,25 @@ const Nav = () => {
     { name: "Home", route: "/home" },
     { name: "About", route: "/about" },
     { name: "Portfolio", route: "/portfolio" },
-    { name: "Investment", route: "/investment" },
+    { name: "Blogs", route: "/blogs" },
     { name: "Clients", route: "/clients" },
     { name: "Contact", route: "/contact" },
   ];
   const pathname = usePathname();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [hasMounted, setHasMounted] = useState(false);
-  const darkPaths = [
+  // const darkPaths = [
+  //   "/clients",
+  //   "/portfolio/weddings",
+  //   "/portfolio/engagements",
+  //   "/portfolio/children-and-family",
+  //   "/portfolio/products-and-lifestyle",
+  //   "/portfolio/portraits",
+  //   "/reviews",
+  //   "/blogs",
+  // ];
+
+  const darkPathsSet = new Set([
     "/clients",
     "/portfolio/weddings",
     "/portfolio/engagements",
@@ -26,8 +37,20 @@ const Nav = () => {
     "/portfolio/products-and-lifestyle",
     "/portfolio/portraits",
     "/reviews",
-    "/blogs",
-  ];
+  ]);
+
+  const isDarkPath = (pathname: string) => {
+    // Exact match with predefined dark paths
+    if (darkPathsSet.has(pathname)) return true;
+
+    // Match dynamic routes like /blogs/:id or /clients/:id
+    const dynamicDarkPathPatterns = [/^\/blogs\/\d+$/, /^\/clients\/\d+$/];
+
+    return dynamicDarkPathPatterns.some((pattern) => pattern.test(pathname));
+  };
+
+  // Usage
+  const isDark = isDarkPath(pathname);
 
   useEffect(() => {
     setHasMounted(true);
@@ -44,7 +67,10 @@ const Nav = () => {
               key={navItem.route}
               href={navItem.route}
               className={` font-light ${
-                darkPaths.includes(pathname) || pathname.startsWith("/clients")
+                // darkPaths.includes(pathname) ||
+                // pathname.startsWith("/clients") ||
+                // pathname.startsWith("/blogs")
+                isDark
                   ? "text-[#000] hover:text-[000]/80"
                   : "text-white hover:text-white/80"
               } `}
@@ -64,9 +90,10 @@ const Nav = () => {
               key={navItem.route}
               href={navItem.route}
               className={`font-light ${
-                darkPaths.includes(pathname) ||
-                pathname.startsWith("/clients") ||
-                pathname.startsWith("/blogs")
+                // darkPaths.includes(pathname) ||
+                // pathname.startsWith("/clients") ||
+                // pathname.startsWith("/blogs")
+                isDark
                   ? "text-[#000] hover:text-[000]/80"
                   : "text-white hover:text-white/80"
               }`}
@@ -85,11 +112,11 @@ const Nav = () => {
             animate={mobileNavOpen ? { rotateZ: 45, y: 6 } : {}}
             style={{
               backgroundColor:
-                mobileNavOpen ||
-                darkPaths.includes(pathname) ||
-                pathname.startsWith("/clients") ||
-                pathname.startsWith("/blogs")
-                  ? "#000"
+                mobileNavOpen || isDark
+                  ? // darkPaths.includes(pathname) ||
+                    // pathname.startsWith("/clients") ||
+                    // pathname.startsWith("/blogs")
+                    "#000"
                   : "#fff",
             }}
             className="w-full h-[1.5px] transition-all duration-300"
@@ -103,11 +130,10 @@ const Nav = () => {
             }
             style={{
               backgroundColor:
-                darkPaths.includes(pathname) ||
-                pathname.startsWith("/clients") ||
-                pathname.startsWith("/blogs")
-                  ? "#000"
-                  : "#fff",
+                // darkPaths.includes(pathname) ||
+                // pathname.startsWith("/clients") ||
+                // pathname.startsWith("/blogs")
+                isDark ? "#000" : "#fff",
             }}
             className="w-full h-[1.5px] transition-all duration-300"
           ></motion.div>
@@ -117,9 +143,10 @@ const Nav = () => {
             style={{
               backgroundColor:
                 mobileNavOpen ||
-                darkPaths.includes(pathname) ||
-                pathname.startsWith("/clients") ||
-                pathname.startsWith("/blogs")
+                // darkPaths.includes(pathname) ||
+                // pathname.startsWith("/clients") ||
+                // pathname.startsWith("/blogs")
+                isDark
                   ? "#000"
                   : "#fff",
             }}

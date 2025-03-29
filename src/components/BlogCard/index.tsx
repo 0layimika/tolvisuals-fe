@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 interface BlogCardProps {
-  source: string;
   date: string;
   title: string;
   imageUrl: string;
@@ -10,12 +9,16 @@ interface BlogCardProps {
 }
 
 export default function BlogCard({
-  source,
   date,
   title,
   imageUrl,
   href,
 }: BlogCardProps) {
+  const formatDate = (dateString: string): string => {
+    const date = new Date(dateString);
+    return date.toLocaleString("en-US", { month: "long", year: "numeric" });
+  };
+
   return (
     <Link
       href={href}
@@ -23,8 +26,10 @@ export default function BlogCard({
     >
       <div className="p-6 pb-4 flex-1">
         <div className="mb-4 flex items-center justify-between">
-          <span className="font-medium text-gray-800 font-serif">TOL VISUALS</span>
-          <span className="text-sm text-gray-500">{date}</span>
+          <span className="font-medium text-gray-800 font-serif">
+            TOL VISUALS
+          </span>
+          <span className="text-sm text-gray-500">{formatDate(date)}</span>
         </div>
         <h3 className="mb-6 text-xl font-bold leading-tight text-gray-900 ">
           {title}

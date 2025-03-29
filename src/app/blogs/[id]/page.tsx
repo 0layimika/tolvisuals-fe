@@ -2,6 +2,7 @@
 import { useGetSingleBlog } from "@/hooks/useGetSingleBlog";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
+import Image from "next/image";
 
 const PerBlogsPage = () => {
   const pathname = usePathname();
@@ -22,11 +23,41 @@ const PerBlogsPage = () => {
         )}
       </h2>
 
+      <div className="">
+        {isLoading ? (
+          <div className="h-[600px] w-4/5 my-7  mx-auto bg-gray-300 rounded animate-pulse"></div>
+        ) : data?.data ? (
+          <Image
+            src={data?.data.thumbnail ?? "/assets/placeholder.jpg"}
+            alt={data?.data.title + " image"}
+            priority
+            width={600}
+            height={450}
+            className="w-full h-full object-cover"
+          />
+        ) : null}
+      </div>
+
       <div className="max-w-5xl px-7 mx-auto">
         {isLoading || isFetching ? (
-          <p>Loading...</p>
+          <div className="md:space-y-8 space-y-4 mx-auto">
+            <div className="h-4 w-full bg-gray-300 rounded animate-pulse"></div>
+            <div className="h-4 w-5/6  bg-gray-300  rounded animate-pulse"></div>
+            <div className="h-4 w-4/6  bg-gray-300 rounded animate-pulse"></div>
+            <div className="h-4 w-5/6  bg-gray-300 rounded animate-pulse"></div>
+            <div className="h-4 w-5/6  bg-gray-300 rounded animate-pulse"></div>{" "}
+            <div className="h-4 w-5/6  bg-gray-300 rounded animate-pulse"></div>{" "}
+            <div className="h-4 w-5/6  bg-gray-300 rounded animate-pulse"></div>
+          </div>
         ) : (
-          <p className="sm:text-lg">{data?.data.content}</p>
+          <p className="sm:text-lg">
+            {data?.data.content.split("\r\n").map((line, index) => (
+              <span key={index}>
+                {line}
+                <br />
+              </span>
+            ))}
+          </p>
         )}
       </div>
     </div>
