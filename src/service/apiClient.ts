@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const axiosInstance = axios.create({
-  baseURL: "https://tolvisuals-backend.vercel.app/api/v1",
+  baseURL: "https://api.tolvisuals.co.uk/api/v1",
 });
 
 export class APIClient<T> {

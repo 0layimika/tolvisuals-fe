@@ -16,7 +16,7 @@ export default function Footer() {
     { name: "Home", route: "/" },
     { name: "About", route: "/about" },
     { name: "Portfolio", route: "/portfolio" },
-    { name: "Investment", route: "/investment" },
+    { name: "Blogs", route: "/blogs" },
     { name: "Clients", route: "/clients" },
     { name: "Contact", route: "/contact" },
   ];
