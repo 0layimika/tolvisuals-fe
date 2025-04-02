@@ -1,10 +1,6 @@
 "use client";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { Checkbox } from "@/components/ui/checkbox";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -14,8 +10,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import ReCAPTCHA from "react-google-recaptcha";
-import { Textarea } from "@/components/ui/textarea";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   Select,
   SelectContent,
@@ -23,7 +18,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { useContactMe } from "@/hooks/useContactMe";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -59,6 +60,8 @@ export default function ContactForm() {
     },
   });
 
+  const { data: submitData } = useContactMe();
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
     if (!recaptchaToken) {
       form.setError("recaptcha", {
@@ -66,6 +69,37 @@ export default function ContactForm() {
       });
       return;
     }
+
+    const formData = new FormData();
+    formData.append("name", values.name);
+    formData.append("phone", values.phone);
+    formData.append("instagram", values.instagram);
+    formData.append("email", values.email);
+    formData.append("sessionType", values.sessionType);
+    if (values.additionalDetails) {
+      formData.append("additonalDetails", values.additionalDetails);
+    }
+    // if (values.communication) {
+    //   formData.append("communication", values.communication);
+    // }
+
+    formData.append("eventDate", values.eventDate);
+    formData.append("eventLocation", values.eventLocation);
+    formData.append("referralSource", values.referralSource);
+    if (values.otherSessionType) {
+      formData.append("otherSessionType", values.otherSessionType);
+    }
+    if (values.otherCommunication) {
+      formData.append("otherCommunication", values.otherCommunication);
+    }
+    formData.append("recaptcha", values.recaptcha);
+
+    submitData(formData, {
+      onSuccess: () => {
+        console.log("data submitted");
+      },
+    });
+
     console.log(values);
   }
 
