@@ -16,7 +16,7 @@ const HomePage = () => {
   const [portfolioTypes, setPortfolioTypes] = useState([
     {
       name: "Wedding",
-      href: "/portfolio/wedding",
+      href: "/portfolio/weddings",
       image: fallbackImage,
     },
     {
@@ -26,7 +26,7 @@ const HomePage = () => {
     },
     {
       name: "Engagement",
-      href: "/portfolio/engagement",
+      href: "/portfolio/engagements",
       image: fallbackImage,
     },
   ]);

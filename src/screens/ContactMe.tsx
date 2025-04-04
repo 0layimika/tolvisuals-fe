@@ -1,4 +1,7 @@
 "use client";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -19,92 +22,120 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { useContactMe } from "@/hooks/useContactMe";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
-import ReCAPTCHA from "react-google-recaptcha";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import { X } from "lucide-react";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name is required"),
   phone: z.string().min(10, "Valid phone number is required"),
   instagram: z.string().min(2, "Instagram handle is required"),
   email: z.string().email("Valid email is required"),
-  sessionType: z.enum([
-    "Wedding",
-    "Pre-wedding",
-    "Portraits",
-    "Events",
-    "Others",
-  ]),
-  otherSessionType: z.string().optional(),
+  sessionType: z
+    .enum(["Wedding", "Pre-wedding", "Portraits", "Events", "Others"])
+    .optional(),
+  otherSessionType: z.string().optional().or(z.literal("")),
   eventDate: z.string().min(1, "Event date is required"),
   eventLocation: z.string().min(1, "Event location is required"),
   communication: z
     .array(z.string())
     .min(1, "Select at least one communication method"),
-  otherCommunication: z.string().optional(),
+  otherCommunication: z.string().optional().or(z.literal("")),
   referralSource: z.string().min(1, "Please tell us how you heard about us"),
-  additionalDetails: z.string().optional(),
-  recaptcha: z.string().min(1, "Please verify that you are not a robot"),
+  additionalDetails: z.string().optional().or(z.literal("")),
 });
 
 export default function ContactForm() {
-  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
+  const searchParams = useSearchParams();
+  const [showThankYou, setShowThankYou] = useState(false);
+
+  useEffect(() => {
+    if (searchParams.get("success") === "true") {
+      setShowThankYou(true);
+
+      const timer = setTimeout(() => {
+        setShowThankYou(false);
+      }, 10000); 
+      return () => clearTimeout(timer);
+    }
+  }, [searchParams]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      name: "",
+      phone: "",
+      instagram: "",
+      email: "",
+      sessionType: undefined,
+      otherSessionType: "",
+      eventDate: "",
+      eventLocation: "",
       communication: [],
+      otherCommunication: "",
+      referralSource: "",
+      additionalDetails: "",
     },
   });
 
-  const { data: submitData } = useContactMe();
+  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    if (!recaptchaToken) {
-      form.setError("recaptcha", {
-        message: "Please complete the reCAPTCHA",
-      });
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append("name", values.name);
-    formData.append("phone", values.phone);
-    formData.append("instagram", values.instagram);
-    formData.append("email", values.email);
-    formData.append("sessionType", values.sessionType);
-    if (values.additionalDetails) {
-      formData.append("additonalDetails", values.additionalDetails);
-    }
-    // if (values.communication) {
-    //   formData.append("communication", values.communication);
-    // }
-
-    formData.append("eventDate", values.eventDate);
-    formData.append("eventLocation", values.eventLocation);
-    formData.append("referralSource", values.referralSource);
-    if (values.otherSessionType) {
-      formData.append("otherSessionType", values.otherSessionType);
-    }
-    if (values.otherCommunication) {
-      formData.append("otherCommunication", values.otherCommunication);
-    }
-    formData.append("recaptcha", values.recaptcha);
-
-    submitData(formData, {
-      onSuccess: () => {
-        console.log("data submitted");
-      },
-    });
-
-    console.log(values);
+    form.handleSubmit((values) => {
+      console.log("Form is valid, submitting:", values);
+      const formEl = e.target as HTMLFormElement;
+      formEl.submit();
+    })(e);
   }
 
   return (
-    <section className="mx-auto max-w-3xl px-4 py-24 pb-12">
+    <section className="mx-auto max-w-3xl px-4 py-24 pb-12 relative">
+      {/* Thank You Message */}
+      {showThankYou && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg p-8 max-w-md w-full relative shadow-xl">
+            <button
+              onClick={() => setShowThankYou(false)}
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+            >
+              <X size={24} />
+            </button>
+            <div className="text-center">
+              <h2 className="text-2xl font-serif font-light mb-4 text-gray-900">
+                Thank You!
+              </h2>
+              <div className="w-16 h-16 bg-[#BEB3A7] rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-8 w-8 text-white"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </div>
+              <p className="text-gray-600 mb-6">
+                Your message has been received. We&apo;ll get back to you shortly to
+                discuss your photography needs.
+              </p>
+              <Button
+                onClick={() => setShowThankYou(false)}
+                className="bg-[#BEB3A7] hover:bg-[#807c7c] text-white font-light py-2 px-6 rounded-none"
+              >
+                Close
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="mb-16">
         <h1 className="mb-6 font-serif md:text-4xl text-2xl font-light tracking-wide text-gray-900 ">
           Let&apos;s Start Your Journey
@@ -123,11 +154,28 @@ export default function ContactForm() {
 
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          action="https://formsubmit.co/olakay739@gmail.com"
+          onSubmit={onSubmit}
+          action="https://formsubmit.co/ayo@tolvisuals.co.uk"
           method="POST"
-          className=" space-y-8"
+          className="space-y-8"
         >
+          <input
+            type="hidden"
+            name="_subject"
+            value="New Photography Inquiry"
+          />
+          <input type="hidden" name="_captcha" value="true" />
+          <input type="hidden" name="_template" value="table" />
+          <input
+            type="hidden"
+            name="_next"
+            value={
+              typeof window !== "undefined"
+                ? `${window.location.href.split("?")[0]}?success=true`
+                : ""
+            }
+          />
+
           <FormField
             control={form.control}
             name="name"
@@ -139,7 +187,9 @@ export default function ContactForm() {
                 <FormControl>
                   <Input
                     {...field}
+                    name="name"
                     className="border-gray-200 rounded-none py-6"
+                    required
                   />
                 </FormControl>
                 <FormMessage />
@@ -158,7 +208,9 @@ export default function ContactForm() {
                 <FormControl>
                   <Input
                     {...field}
+                    name="phone"
                     className="border-gray-200 rounded-none py-6"
+                    required
                   />
                 </FormControl>
                 <FormMessage />
@@ -177,7 +229,9 @@ export default function ContactForm() {
                 <FormControl>
                   <Input
                     {...field}
+                    name="instagram"
                     className="border-gray-200 rounded-none py-6"
+                    required
                   />
                 </FormControl>
                 <FormMessage />
@@ -196,8 +250,10 @@ export default function ContactForm() {
                 <FormControl>
                   <Input
                     {...field}
+                    name="email"
                     type="email"
                     className="border-gray-200 rounded-none py-6"
+                    required
                   />
                 </FormControl>
                 <FormMessage />
@@ -216,7 +272,7 @@ export default function ContactForm() {
                 <FormControl>
                   <RadioGroup
                     onValueChange={field.onChange}
-                    defaultValue={field.value}
+                    value={field.value || ""}
                     className="space-y-2.5"
                   >
                     {[
@@ -238,21 +294,29 @@ export default function ContactForm() {
                     ))}
                   </RadioGroup>
                 </FormControl>
+                {/* Hidden input to ensure the value is sent with the form */}
+                <input
+                  type="hidden"
+                  name="sessionType"
+                  value={field.value || ""}
+                />
                 <FormMessage />
               </FormItem>
             )}
           />
+
           <FormField
             control={form.control}
             name="otherSessionType"
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="text-xs tracking-widest">
-                  OTHERS, PLEASE SPECIFY*
+                  OTHERS, PLEASE SPECIFY
                 </FormLabel>
                 <FormControl>
                   <Input
                     {...field}
+                    name="otherSessionType"
                     className="border-gray-200 rounded-none py-6"
                   />
                 </FormControl>
@@ -272,8 +336,10 @@ export default function ContactForm() {
                 <FormControl>
                   <Input
                     {...field}
+                    name="eventDate"
                     type="date"
                     className="border-gray-200 rounded-none py-6"
+                    required
                   />
                 </FormControl>
                 <FormMessage />
@@ -292,7 +358,9 @@ export default function ContactForm() {
                 <FormControl>
                   <Input
                     {...field}
+                    name="eventLocation"
                     className="border-gray-200 rounded-none py-6"
+                    required
                   />
                 </FormControl>
                 <FormMessage />
@@ -320,6 +388,8 @@ export default function ContactForm() {
                           <FormItem className="flex mb-4 items-center space-x-3">
                             <FormControl className="space-y-2.5">
                               <Checkbox
+                                name="communication"
+                                value={method}
                                 checked={field.value?.includes(method)}
                                 onCheckedChange={(checked) => {
                                   const value = field.value || [];
@@ -351,11 +421,12 @@ export default function ContactForm() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="text-xs tracking-widest">
-                  OTHERS, PLEASE SPECIFY*
+                  OTHERS, PLEASE SPECIFY
                 </FormLabel>
                 <FormControl>
                   <Input
                     {...field}
+                    name="otherCommunication"
                     className="border-gray-200 rounded-none py-6"
                   />
                 </FormControl>
@@ -374,7 +445,8 @@ export default function ContactForm() {
                 </FormLabel>
                 <Select
                   onValueChange={field.onChange}
-                  defaultValue={field.value}
+                  value={field.value || ""}
+                  name="referralSource"
                 >
                   <FormControl>
                     <SelectTrigger className="border-gray-200 rounded-none py-6 w-full">
@@ -399,31 +471,15 @@ export default function ContactForm() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="text-xs tracking-widest">
-                  ANY ADDITIONAL DETAILS? *
+                  ANY ADDITIONAL DETAILS?
                 </FormLabel>
                 <FormControl>
                   <Textarea
                     {...field}
+                    name="additionalDetails"
                     className="min-h-[150px] rounded-none border-gray-200"
                   />
                 </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="recaptcha"
-            render={() => (
-              <FormItem>
-                <ReCAPTCHA
-                  sitekey="YOUR_GOOGLE_RECAPTCHA_SITE_KEY"
-                  onChange={(token) => {
-                    setRecaptchaToken(token);
-                    form.setValue("recaptcha", token || "");
-                  }}
-                />
                 <FormMessage />
               </FormItem>
             )}
