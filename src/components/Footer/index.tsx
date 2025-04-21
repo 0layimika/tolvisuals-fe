@@ -90,7 +90,7 @@ export default function Footer() {
             </Link>
             <Link
               target="_blank"
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/ayotunde-adepoju-8bbb69194?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
               className="text-gray-800 hover:text-gray-600"
               aria-label="LinkedIn"
             >
@@ -103,7 +103,7 @@ export default function Footer() {
             </Link>
             <Link
               target="_blank"
-              href="https://linkedin.com"
+              href="https://www.tiktok.com/@tolvisuals9?_t=ZN-8vg4hJeJEZS&_r=1"
               className="text-gray-800 hover:text-gray-600"
               aria-label="LinkedIn"
             >
@@ -116,7 +116,7 @@ export default function Footer() {
             </Link>
             <Link
               target="_blank"
-              href="https://linkedin.com"
+              href="https://youtube.com/@tolvisuals9?si=FluLHNZolWI1BTE3"
               className="text-gray-800 hover:text-gray-600"
               aria-label="LinkedIn"
             >
